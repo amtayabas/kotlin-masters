@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Kotlin Masters</string>
+    <string name="sign_up">Sign up</string>
+    <string name="confirm_code_title">Enter the 6-digit code sent to</string>
+    <string name="code">Code</string>
+    <string name="error_confirm_code">Incorrect code. You can try 2 more times.</string>
+    <string name="request_code_title">Didn\'t receive it?</string>
+    <string name="request_new_code">Request a new code</string>
+</resources>
