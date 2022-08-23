@@ -6,4 +6,5 @@
     <string name="error_confirm_code">Incorrect code. You can try 2 more times.</string>
     <string name="request_code_title">Didn\'t receive it?</string>
     <string name="request_new_code">Request a new code</string>
+    <string name="log_in">LOG IN</string>
 </resources>
