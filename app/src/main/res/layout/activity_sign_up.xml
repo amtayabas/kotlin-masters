@@ -30,7 +30,7 @@
         android:id="@+id/tvPhoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Phone Number"
+        tools:text="@string/phone_number"
         android:layout_marginTop="@dimen/xlarge_margin"
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintTop_toBottomOf="@+id/header" />
@@ -40,6 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber">
@@ -47,22 +48,24 @@
         <com.rilixtech.widget.countrycodepicker.CountryCodePicker
             android:id="@+id/ccp"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_height="48dp"
+            android:gravity="start|center"
+            android:layout_weight="0.2"
             app:ccp_defaultNameCode="PH"
             app:ccp_hideNameCode="true"
             app:ccp_defaultCode="63"
             app:ccp_hidePhoneCode="false"
-            app:ccp_textSize="15sp"/>
+            app:ccp_textSize="@dimen/medium_font"/>
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phoneNumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight=".6"
             android:inputType="number"
             android:lines="1"
             android:singleLine="true"
+            android:textSize="@dimen/medium_font"
             android:drawablePadding="8dp" />
 
     </LinearLayout>
@@ -81,7 +84,7 @@
             android:id="@+id/tvEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Email"
+            tools:text="@string/email"
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintTop_toBottomOf="@+id/phoneNumberLayout"/>
 
@@ -92,7 +95,8 @@
             android:inputType="textEmailAddress"
             android:lines="1"
             android:singleLine="true"
-            android:drawablePadding="8dp"/>
+            android:drawablePadding="8dp"
+            android:textSize="@dimen/medium_font"/>
 
     </LinearLayout>
 
@@ -110,7 +114,7 @@
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Name"
+            tools:text="@string/name"
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintTop_toBottomOf="@+id/email"/>
 
@@ -119,7 +123,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            android:textSize="@dimen/medium_font"/>
 
     </LinearLayout>
 
@@ -137,7 +142,7 @@
         android:id="@+id/btnNext"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="Next"
+        tools:text="@string/next_button"
         android:textColor="@color/white"
         android:background="@drawable/round_button"
         app:layout_constraintStart_toStartOf="@id/glStart"
