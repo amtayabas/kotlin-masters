@@ -34,10 +34,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="360dp"
         android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/glStart"
@@ -47,8 +48,8 @@
             android:id="@+id/btnFb"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginStart="@dimen/xxlarge_margin"
+            android:layout_marginEnd="@dimen/xxlarge_margin"
             android:layout_marginBottom="10dp"
             android:background="@drawable/border_login"
             android:drawableStart="@drawable/icn_fb"
@@ -62,8 +63,8 @@
             android:id="@+id/btnGoogle"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginStart="@dimen/xxlarge_margin"
+            android:layout_marginEnd="@dimen/xxlarge_margin"
             android:layout_marginBottom="10dp"
             android:background="@drawable/border_login"
             android:drawableStart="@drawable/icn_google"
@@ -77,8 +78,8 @@
             android:id="@+id/btnApple"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginStart="@dimen/xxlarge_margin"
+            android:layout_marginEnd="@dimen/xxlarge_margin"
             android:layout_marginBottom="10dp"
             android:background="@drawable/border_login"
             android:drawableStart="@drawable/icn_apple"
@@ -90,9 +91,10 @@
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintEnd_toEndOf="@id/glEnd">
 
@@ -100,32 +102,24 @@
                 android:id="@+id/viewLine1"
                 android:layout_width="130dp"
                 android:layout_height="1dp"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/medium_padding"
                 android:background="#AAAAAA" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:text="@string/or"
                 android:textAlignment="center"
                 android:textAllCaps="false"
-                android:textColor="#AAAAAA"
-                tools:layout_conversion_absoluteHeight="36dp"
-                tools:layout_conversion_absoluteWidth="2dp"
-                tools:layout_editor_absoluteX="395dp"
-                tools:layout_editor_absoluteY="614dp" />
+                android:textColor="#AAAAAA" />
 
             <View
                 android:id="@+id/viewLine2"
                 android:layout_width="130dp"
                 android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
+                android:layout_marginStart="@dimen/medium_padding"
                 android:background="#AAAAAA" />
 
         </LinearLayout>
@@ -136,8 +130,8 @@
         android:id="@+id/btnNumber"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="3dp"
+        android:layout_marginStart="@dimen/xxlarge_margin"
+        android:layout_marginEnd="@dimen/xxlarge_margin"
         android:layout_marginTop="10dp"
         android:background="@drawable/border_login"
         android:drawableStart="@drawable/icn_mobile"
