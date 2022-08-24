@@ -7,7 +7,6 @@
     android:background="#2D2D2D"
     tools:context=".LoginActivity">
 
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="300dp"
@@ -31,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/fb"
+            android:id="@+id/btnFb"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginStart="60dp"
@@ -46,7 +45,7 @@
             android:textAllCaps="false" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/google"
+            android:id="@+id/btnGoogle"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginStart="60dp"
@@ -61,7 +60,7 @@
             android:textAllCaps="false" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/Apple"
+            android:id="@+id/btnApple"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginStart="60dp"
@@ -118,7 +117,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/number"
+        android:id="@+id/btnNumber"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
