@@ -1,5 +1,6 @@
 package csv.masters.myapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -16,10 +17,12 @@ class LandingActivity : AppCompatActivity() {
 
         with(binding) {
             btnLogin.setOnClickListener{
-                Toast.makeText(this@LandingActivity, "Login Button Clicked", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@LandingActivity, LoginActivity::class.java)
+                startActivity(intent)
             }
             btnSignup.setOnClickListener {
-                Toast.makeText( this@LandingActivity,"Signup Button Clicked", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@LandingActivity, SignUpActivity::class.java)
+                startActivity(intent)
             }
         }
     }
