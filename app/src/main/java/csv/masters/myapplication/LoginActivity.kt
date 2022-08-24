@@ -3,6 +3,7 @@ package csv.masters.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import csv.masters.myapplication.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -11,37 +12,39 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupView()
+    }
+
+    private fun setupView() {
         with(binding) {
-            btnFb.text = "Coonect with Facebook"
-            btnGoogle.text = "Connect with Google"
-            btnApple.text = "Connect with Apple"
-            btnNumber.text = "Connect with Number"
+            btnFb.text = getString(R.string.continue_with_facebook)
+            btnGoogle.text = getString(R.string.continue_with_google)
+            btnApple.text = getString(R.string.continue_with_apple)
+            btnNumber.text = getString(R.string.continue_with_number)
 
             btnFb.setOnClickListener {
-                gotoNextPage()
+                gotoNextPage("Facebook")
             }
 
             btnGoogle.setOnClickListener {
-                gotoNextPage()
+                gotoNextPage("Google")
             }
 
             btnApple.setOnClickListener {
-                gotoNextPage()
+                gotoNextPage("Apple")
             }
 
             btnNumber.setOnClickListener {
-                gotoNextPage()
+                startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
             }
         }
     }
 
-    private fun gotoNextPage() {
-       // val intent = Intent(this@LoginActivity::class.java)
-        startActivity(intent)
+    private fun gotoNextPage(nextPage: String) {
+       Toast.makeText(applicationContext, "Continue with $nextPage...", Toast.LENGTH_SHORT).show()
     }
 }
 

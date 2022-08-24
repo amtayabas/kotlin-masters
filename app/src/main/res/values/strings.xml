@@ -3,7 +3,8 @@
     <string name="sign_up">Sign up</string>
     <string name="confirm_code_title">Enter the 6-digit code sent to</string>
     <string name="code">Code</string>
-    <string name="error_confirm_code">Incorrect code. You can try 2 more times.</string>
+    <string name="error_confirm_code">Incorrect code. You can try %d more times.</string>
+    <string name="error_confirm_failed">Code confirmation failed. Request a new code.</string>
     <string name="request_code_title">Didn\'t receive it?</string>
     <string name="request_new_code">Request a new code</string>
     <string name="log_in">LOG IN</string>
@@ -13,6 +14,11 @@
     <string name="name">Name</string>
     <string name="phone_number">Phone Number</string>
     <string name="next_button">Next</string>
-    <string name="empty_message">Please enter a text</string>
+    <string name="empty_message">Please enter the required data</string>
     <string name="invalid_email">Invalid email address</string>
+    <string name="continue_with_facebook">Continue With Facebook</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with_apple">Continue with Apple</string>
+    <string name="or">or</string>
+    <string name="continue_with_number">Continue with Number</string>
 </resources>
