@@ -21,4 +21,17 @@
     <string name="continue_with_apple">Continue with Apple</string>
     <string name="or">or</string>
     <string name="continue_with_number">Continue with Number</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="my_order">My Order</string>
+    <string name="order_prepared">Your order is being prepared…</string>
+    <string name="order_eta">ETA: 2:25 - 2:40 PM</string>
+    <string name="rider_name">Alexander Reyes</string>
+    <string name="rating">5.0</string>
+    <string name="vehicle_type">Honda ACB125CBFL</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="number_of_orders">2x</string>
+    <string name="iced_latte">Iced Latte</string>
+    <string name="large">Large (24 oz)</string>
+    <string name="hazelnut">Hazelnut syrup</string>
+    <string name="price">Php 200.00</string>
 </resources>
