@@ -1,4 +1,4 @@
-package csv.masters.myapplication
+package csv.masters.myapplication.presentation.signup
 
 import android.content.Intent
 import android.graphics.Paint
@@ -7,6 +7,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import csv.masters.myapplication.MainActivity
+import csv.masters.myapplication.R
 import csv.masters.myapplication.databinding.ActivityConfirmCodeBinding
 import csv.masters.myapplication.databinding.LayoutSignupHeaderBinding
 
