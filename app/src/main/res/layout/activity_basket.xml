@@ -26,19 +26,19 @@
             app:layout_constraintGuide_percent=".95" />
 
 
-        <TextView android:id="@+id/tvMyBasket"
+        <TextView
+            android:id="@+id/tvMyBasket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintEnd_toEndOf="@id/glEnd"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="10dp"
             android:text="My Basket"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textAllCaps="true"
-            />
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvDeliverTo"
@@ -46,28 +46,29 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Deliver to"
+            android:textColor="@color/dark_gray"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#DDDDDD"
-            app:layout_constraintTop_toBottomOf="@+id/tvMyBasket"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintEnd_toEndOf="@id/glEnd"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvMyBasket" />
 
-        <EditText android:id="@+id/etSelectLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintEnd_toEndOf="@id/glEnd"
-            app:layout_constraintTop_toBottomOf="@id/tvDeliverTo"
+        <EditText
+            android:id="@+id/etSelectLocation"
+            android:layout_width="380dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="05dp"
+            android:drawableEnd="@drawable/icn_pin"
             android:hint="Select location"
-            android:textColorHint="@color/gray"
             android:paddingLeft="20dp"
-            android:drawableEnd="@drawable/icn_pin"/>
+            android:textColorHint="@color/dark_gray"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@id/tvDeliverTo" />
 
         <TextView
             android:id="@+id/tvOrderSummary"
@@ -76,23 +77,22 @@
             android:layout_margin="10dp"
             android:layout_marginTop="12dp"
             android:text="Order Summary"
+            android:textColor="@color/dark_gray"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#DDDDDD"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintTop_toBottomOf="@+id/etSelectLocation" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cartItemsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/glStart"
+            android:nestedScrollingEnabled="false"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
-            app:layout_constraintTop_toBottomOf="@+id/tvOrderSummary"
-            android:nestedScrollingEnabled="false"/>
-
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderSummary" />
 
         <TextView
             android:id="@+id/tvPaymentDetails"
@@ -100,56 +100,67 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginTop="8dp"
-            android:text="Payment Details"
+            android:text="Payment details"
+            android:textColor="@color/dark_gray"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#DDDDDD"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintTop_toBottomOf="@+id/cartItemsRecyclerView" />
 
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/rbCash"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginTop="20dp"
-            android:text="Cash on delivery"
-            android:textSize="15sp"
-            android:textColor="@color/dark_gray"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintTop_toBottomOf="@+id/tvPaymentDetails" />
+            app:layout_constraintTop_toBottomOf="@id/tvPaymentDetails">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rbCash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Cash on delivery"
+                android:textColor="@color/black"
+                android:textSize="18.5sp"
+                app:layout_constraintEnd_toEndOf="@id/glEnd"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintTop_toBottomOf="@+id/tvPaymentDetails" />
 
 
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/rbCreditCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginTop="12dp"
-            android:text="Credit card(VISA 9524)"
-            android:textSize="15sp"
-            android:textColor="@color/dark_gray"
-            app:layout_constraintEnd_toEndOf="@id/glEnd"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintTop_toBottomOf="@+id/rbCash" />
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rbCreditCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="12dp"
+                android:text="Credit card(VISA 9524)"
+                android:textColor="@color/black"
+                android:textSize="18.5sp"
+                app:layout_constraintEnd_toEndOf="@id/glEnd"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintTop_toBottomOf="@+id/rbCash" />
+
+        </RadioGroup>
 
         <View
             android:id="@+id/view"
             android:layout_width="380dp"
             android:layout_height="2dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="32dp"
-            android:backgroundTint="#DDDDDD"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.516"
-            app:layout_constraintStart_toStartOf="@id/glStart"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="@color/dark_gray"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/tvTotal"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
-            app:layout_constraintTop_toBottomOf="@+id/rbCreditCard" />
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
         <TextView
             android:id="@+id/tvTotal"
@@ -158,9 +169,9 @@
             android:layout_margin="10dp"
             android:layout_marginTop="4dp"
             android:text="Total"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/glStart"
@@ -173,9 +184,9 @@
             android:layout_margin="10dp"
             android:layout_marginTop="8dp"
             android:text="Php 300.00"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@id/glStart"
@@ -185,18 +196,17 @@
             android:id="@+id/buttonPlaceOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintEnd_toEndOf="@id/glEnd"
-            app:layout_constraintTop_toBottomOf="@+id/tvTotal"
-            android:text="Place order"
-            android:textSize="16sp"
-            android:textColor="@color/dark_gray"
-            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg"
             android:gravity="center"
             android:padding="10dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/button_bg"/>
-
+            android:text="Place order"
+            android:textColor="@color/dark_gray"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

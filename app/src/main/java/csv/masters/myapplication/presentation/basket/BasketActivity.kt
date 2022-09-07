@@ -1,8 +1,10 @@
 package csv.masters.myapplication.presentation.basket
 
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import csv.masters.myapplication.R
 import csv.masters.myapplication.databinding.ActivityBasketBinding
@@ -10,14 +12,6 @@ import csv.masters.myapplication.databinding.ActivityBasketBinding
 class BasketActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBasketBinding
-    lateinit var scrollView: ScrollView
-    lateinit var rbCash: RadioButton
-    lateinit var rbCreditCard: RadioButton
-    lateinit var SelectLocation: EditText
-    lateinit var cartItemsRecyclerView: RecyclerView
-    lateinit var tvTotalAmount:TextView
-    lateinit var buttonPlaceYourOrder:Button
-    lateinit var placeYourOrderAdapter: BasketActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,16 +23,52 @@ class BasketActivity : AppCompatActivity() {
 
     private fun setupView() {
         with(binding) {
-    }
 
-    SelectLocation = findViewById(R.id.etSelectLocation)
-        tvTotalAmount = findViewById(R.id.tvTotalAmount)
-        buttonPlaceYourOrder = findViewById(R.id.buttonPlaceOrder)
-        cartItemsRecyclerView = findViewById(R.id.cartItemsRecyclerView)
+            tvMyBasket.text = "MY BASKET"
+            tvDeliverTo.text = "Deliver to"
+            tvOrderSummary.text = "Order Summary"
+            tvPaymentDetails.text = "Payment Details"
+            rbCash.text = "Cash"
+            rbCreditCard.text = "Credit Card"
+            tvTotal.text = "Total"
+            buttonPlaceOrder.text = "PlaceOrder"
 
 
-       // buttonPlaceYourOrder.setOnClickListener {
-       //     startActivity(Intent(this@BasketActivity, ::class.java))
+            fun onRadioButtonClicked(view: View) {
+                if (view is RadioButton) {
+                    val checked = view.isChecked
+                    when (view.getId()) {
+                        R.id.rbCash ->
+                            if (checked) {
+                                rbCash.isChecked = true
+                            }
+                        R.id.rbCreditCard ->
+                            if (checked) {
+                                rbCreditCard.isChecked = false
+
+                            }
+                    }
+                }
+            }
+
+            buttonPlaceOrder.setOnClickListener() {
+                Toast.makeText(this@BasketActivity, "Order Successful", Toast.LENGTH_LONG).show()
+            }
         }
 
+
+//        initRecyclerView()
+//        calculateTotalamount()
+//    }
+//
+//    private fun initRecyclerView() {
+//        TODO("Not yet implemented")
+//    }
+//
+//    private fun calculateTotalamount() {
+//        TODO("Not yet implemented")
+//    }
+
     }
+}
+
