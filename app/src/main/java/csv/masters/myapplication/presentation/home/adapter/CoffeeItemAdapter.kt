@@ -1,62 +1,59 @@
 package csv.masters.myapplication.presentation.home.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import csv.masters.myapplication.R
-import csv.masters.myapplication.data.remote.dto.product.CoffeeResponseItem
+import com.bumptech.glide.Glide
+import csv.masters.myapplication.data.remote.dto.product.Product
+import csv.masters.myapplication.databinding.ItemProductBinding
 
-class CoffeeItemAdapter :
-    ListAdapter<CoffeeResponseItem, CoffeeItemAdapter.CoffeeItemViewHolder>(CoffeeItemDiffCallback()) {
+class CoffeeItemAdapter : RecyclerView.Adapter<CoffeeItemAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeItemViewHolder {
-        val layout = LayoutInflater.from(parent.context).inflate(R.layout.item_name, parent, false)
-        return CoffeeItemViewHolder(layout)
-    }
+    inner class ViewHolder(val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onBindViewHolder(holder: CoffeeItemViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }
+    private val differCallback = object : DiffUtil.ItemCallback<Product>() {
+        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+            return oldItem == newItem
+        }
 
-    class CoffeeItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-        fun bind(coffeeResponseItem: CoffeeResponseItem) {
-            val itemName: TextView = itemView.findViewById(R.id.tv_group_name)
-            val products: RecyclerView = itemView.findViewById(R.id.recyclerView_product)
-            products.layoutManager = LinearLayoutManager(itemView.context)
-            object : LinearLayoutManager(itemView.context) {
-                override fun canScrollVertically(): Boolean {
-                    return false
-                }
-            }
-            itemName.text = coffeeResponseItem.name
-
-            val productAdapter = CoffeeProductAdapter()
-            products.adapter = productAdapter
-            productAdapter.setOnItemClickListener(object : CoffeeProductAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int) {
-                    val product = coffeeResponseItem.products[position]
-                    Log.d("CoffeeItemAdapter", "onItemClick => $product")
-                }
-            })
-            productAdapter.submitList(coffeeResponseItem.products)
+        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+            return oldItem.name == newItem.name &&
+                    oldItem.price == newItem.price
         }
     }
-}
 
-class CoffeeItemDiffCallback : DiffUtil.ItemCallback<CoffeeResponseItem>() {
+    val differ = AsyncListDiffer(this, differCallback)
 
-    override fun areItemsTheSame(oldItem: CoffeeResponseItem, newItem: CoffeeResponseItem): Boolean {
-        return oldItem == newItem
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
-    override fun areContentsTheSame(oldItem: CoffeeResponseItem, newItem: CoffeeResponseItem): Boolean {
-        return oldItem.products == newItem.products
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.itemView.apply {
+            val product = differ.currentList[position]
+
+            with(holder.binding) {
+                tvProductName.text = product.name
+                tvSizes.text = product.sizes
+                tvPrice.text = String.format("Php %.2f", product.price)
+
+                Glide.with(this@apply)
+                    .load(product.image)
+                    .into(imgProduct)
+            }
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return differ.currentList.size
+    }
+
+    private var onItemClickListener: ((Product) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Product) -> Unit) {
+        onItemClickListener = listener
     }
 }
