@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import csv.masters.myapplication.R
 import csv.masters.myapplication.databinding.ActivityHomeBinding
 import csv.masters.myapplication.presentation.basket.BasketFragment
+import csv.masters.myapplication.presentation.productdetail.ProductDetailFragment
 
 class HomeActivity : AppCompatActivity() {
 
@@ -45,6 +46,9 @@ class HomeActivity : AppCompatActivity() {
                     }
                     R.id.basketFragment -> {
                         replaceFragment(BasketFragment(), "Basket")
+                    }
+                    R.id.productDetailFragment -> {
+                        replaceFragment(ProductDetailFragment(), "Product Detail")
                     }
                 }
                 true

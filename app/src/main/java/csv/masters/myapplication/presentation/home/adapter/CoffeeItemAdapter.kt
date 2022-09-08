@@ -1,18 +1,19 @@
-package csv.masters.myapplication.adapter
+package csv.masters.myapplication.presentation.home.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import csv.masters.myapplication.R
 import csv.masters.myapplication.data.remote.dto.product.CoffeeResponseItem
 
-class CoffeeItemAdapter : ListAdapter<CoffeeResponseItem, CoffeeItemAdapter.CoffeeItemViewHolder>(CoffeeItemDiffCallback()) {
+class CoffeeItemAdapter :
+    ListAdapter<CoffeeResponseItem, CoffeeItemAdapter.CoffeeItemViewHolder>(CoffeeItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeItemViewHolder {
         val layout = LayoutInflater.from(parent.context).inflate(R.layout.item_name, parent, false)
@@ -23,13 +24,17 @@ class CoffeeItemAdapter : ListAdapter<CoffeeResponseItem, CoffeeItemAdapter.Coff
         holder.bind(getItem(position))
     }
 
-    class CoffeeItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class CoffeeItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(coffeeResponseItem: CoffeeResponseItem) {
-            val itemName : TextView = itemView.findViewById(R.id.tv_group_name)
-            val products : RecyclerView = itemView.findViewById(R.id.recyclerView_product)
+            val itemName: TextView = itemView.findViewById(R.id.tv_group_name)
+            val products: RecyclerView = itemView.findViewById(R.id.recyclerView_product)
             products.layoutManager = LinearLayoutManager(itemView.context)
-            object : LinearLayoutManager(itemView.context){ override fun canScrollVertically(): Boolean { return false } }
+            object : LinearLayoutManager(itemView.context) {
+                override fun canScrollVertically(): Boolean {
+                    return false
+                }
+            }
             itemName.text = coffeeResponseItem.name
 
             val productAdapter = CoffeeProductAdapter()
@@ -52,6 +57,6 @@ class CoffeeItemDiffCallback : DiffUtil.ItemCallback<CoffeeResponseItem>() {
     }
 
     override fun areContentsTheSame(oldItem: CoffeeResponseItem, newItem: CoffeeResponseItem): Boolean {
-        return oldItem == newItem
+        return oldItem.products == newItem.products
     }
 }

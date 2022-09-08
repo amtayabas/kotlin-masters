@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import csv.masters.myapplication.adapter.CoffeeItemAdapter
+import csv.masters.myapplication.presentation.home.adapter.CoffeeItemAdapter
 import csv.masters.myapplication.data.remote.api.ProductsApi
 import csv.masters.myapplication.data.remote.api.RetrofitClient
 import csv.masters.myapplication.data.remote.dto.product.CoffeeResponseItem

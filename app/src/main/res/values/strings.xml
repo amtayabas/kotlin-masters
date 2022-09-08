@@ -42,4 +42,5 @@
     <string name="close">Close</string>
     <string name="search">Search</string>
     <string name="product_price">Php %1$s.00</string>
+    <string name="product_detail">Product Detail</string>
 </resources>
