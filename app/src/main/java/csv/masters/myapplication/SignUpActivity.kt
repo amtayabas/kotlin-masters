@@ -1,12 +1,10 @@
-package csv.masters.myapplication.presentation.signup
+package csv.masters.myapplication
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
-import csv.masters.myapplication.presentation.signup.ConfirmCodeActivity.Companion.PHONE_NUMBER
-import csv.masters.myapplication.R
 import csv.masters.myapplication.databinding.ActivitySignUpBinding
 import csv.masters.myapplication.databinding.LayoutSignupHeaderBinding
 
@@ -20,10 +18,6 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupView()
-    }
-
-    private fun setupView() {
         headerBinding = binding.header
         headerBinding.tvTitle.text = getString(R.string.signUp)
 
@@ -38,9 +32,7 @@ class SignUpActivity : AppCompatActivity() {
         binding.btnNext.setOnClickListener {
             if (isTextFieldNotEmpty()) {
                 if (isEmailValid()) {
-                    val intent = Intent(this, ConfirmCodeActivity::class.java).apply {
-                        putExtra(PHONE_NUMBER, binding.ccp.selectedCountryCode + binding.phoneNumber.text)
-                    }
+                    val intent = Intent(this, ConfirmCodeActivity::class.java)
                     startActivity(intent)
                 } else {
                     Toast.makeText(this, R.string.invalid_email, Toast.LENGTH_SHORT).show()
