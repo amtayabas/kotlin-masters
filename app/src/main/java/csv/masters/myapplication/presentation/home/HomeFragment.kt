@@ -58,6 +58,6 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
-        private val LOG_TAG = HomeFragment::class.java.simpleName
+        val LOG_TAG = HomeFragment::class.java.simpleName
     }
 }
