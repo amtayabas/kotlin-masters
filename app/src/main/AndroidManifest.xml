@@ -16,9 +16,6 @@
         android:theme="@style/Theme.KotlinMasters"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.home.HomeActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.landing.LandingActivity"
             android:exported="false" />
         <activity
@@ -34,7 +31,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.basket.BasketActivity"
+            android:name=".presentation.home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package csv.masters.myapplication.adapter
+package csv.masters.myapplication.presentation.home.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -60,6 +60,7 @@ class CoffeeProductDiffCallback : DiffUtil.ItemCallback<Product>() {
     }
 
     override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-        return oldItem == newItem
+        return oldItem.name == newItem.name &&
+                oldItem.price == newItem.price
     }
 }
