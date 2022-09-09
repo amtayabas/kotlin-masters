@@ -1,7 +1,7 @@
 package csv.masters.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import csv.masters.myapplication.databinding.ActivityMainBinding
 import csv.masters.myapplication.databinding.LayoutMainHeaderBinding

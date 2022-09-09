@@ -49,6 +49,10 @@ class CoffeeGroupAdapter :
                     productAdapter.setOnItemClickListener(it)
                 }
 
+                onAddToCartClickListener?.let {
+                    productAdapter.setOnAddToCartClickListener(it)
+                }
+
                 productAdapter.differ.submitList(coffeeGroup.products)
             }
         }
@@ -59,8 +63,13 @@ class CoffeeGroupAdapter :
     }
 
     private var onItemClickListener: ((Product) -> Unit)? = null
+    private var onAddToCartClickListener: ((Product) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (Product) -> Unit) {
         onItemClickListener = listener
+    }
+
+    fun setOnAddToCartClickListener(listener: (Product) -> Unit) {
+        onAddToCartClickListener = listener
     }
 }

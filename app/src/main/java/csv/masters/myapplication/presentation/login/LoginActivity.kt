@@ -1,9 +1,9 @@
 package csv.masters.myapplication.presentation.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import csv.masters.myapplication.R
 import csv.masters.myapplication.databinding.ActivityLoginBinding
 import csv.masters.myapplication.presentation.signup.SignUpActivity

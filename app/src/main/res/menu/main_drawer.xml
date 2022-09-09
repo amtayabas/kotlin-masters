@@ -9,8 +9,4 @@
         android:id="@id/basketFragment"
         android:title="@string/basket"/>
 
-    <item
-        android:id="@id/productDetailFragment"
-        android:title="@string/product_detail"/>
-
 </menu>

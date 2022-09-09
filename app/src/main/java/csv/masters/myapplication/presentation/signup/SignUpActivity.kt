@@ -1,14 +1,14 @@
 package csv.masters.myapplication.presentation.signup
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
-import csv.masters.myapplication.presentation.signup.ConfirmCodeActivity.Companion.PHONE_NUMBER
+import androidx.appcompat.app.AppCompatActivity
 import csv.masters.myapplication.R
 import csv.masters.myapplication.databinding.ActivitySignUpBinding
 import csv.masters.myapplication.databinding.LayoutSignupHeaderBinding
+import csv.masters.myapplication.presentation.signup.ConfirmCodeActivity.Companion.PHONE_NUMBER
 
 class SignUpActivity : AppCompatActivity() {
 

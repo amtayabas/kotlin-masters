@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.Guideline
@@ -20,15 +20,22 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".95" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".1" />
+
     <LinearLayout
         android:id="@+id/product_details_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@+id/tvQuantity"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="@dimen/small_margin"
-        android:paddingTop="@dimen/small_padding">
+        app:layout_constraintTop_toTopOf="@id/glTop"
+        app:layout_constraintEnd_toEndOf="@id/glEnd"
+        android:layout_marginStart="@dimen/small_margin">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvProductName"
@@ -52,9 +59,9 @@
             android:id="@+id/tvAddOns"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Hazelnut Syrup"
             android:textColor="@color/dark_gray"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            tools:text="Hazelnut Syrup" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvEdit"
@@ -71,7 +78,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="@dimen/small_padding"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/glTop"
         app:layout_constraintTop_toBottomOf="parent"
         tools:ignore="MissingConstraints" />
 
@@ -84,7 +91,7 @@
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/glTop" />
 
     <TextView
         android:id="@+id/tvPrice"
@@ -95,10 +102,8 @@
         android:textColor="@color/dark_gray"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/viewLine2"
-        app:layout_constraintEnd_toEndOf="@id/glEnd"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/glStart"/>
+        app:layout_constraintTop_toTopOf="@id/glTop"
+        app:layout_constraintEnd_toEndOf="@id/glEnd" />
 
     <View
         android:id="@+id/viewLine2"
