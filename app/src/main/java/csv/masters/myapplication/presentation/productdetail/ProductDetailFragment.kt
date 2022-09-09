@@ -83,7 +83,7 @@ class ProductDetailFragment : Fragment() {
                     viewLifecycleOwner.lifecycleScope.launch {
                         basketManager!!.Operations().addToBasket(selectedProduct!!)
                     }
-                    Toast.makeText(requireContext(), "${selectedProduct!!.name} to basket", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "${selectedProduct!!.name} added to basket", Toast.LENGTH_SHORT).show()
                 }
 
             }
