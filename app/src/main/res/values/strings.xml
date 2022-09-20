@@ -44,4 +44,9 @@
     <string name="product_price">Php %1$s.00</string>
     <string name="product_detail">Product Detail</string>
     <string name="edit">Edit</string>
+    <string name="add_to_basket">Add TO BASKET - %1$s</string>
+    <string name="update_basket">UPDATE BASKET - %1$s</string>
+    <string name="quantity"><u>QTY: %1$s</u></string>
+    <string name="sizes">Large (24 oz)</string>
+    <string name="add_ons">Extra espress</string>
 </resources>

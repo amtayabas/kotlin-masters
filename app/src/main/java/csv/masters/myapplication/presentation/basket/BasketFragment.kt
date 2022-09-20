@@ -112,7 +112,7 @@ class BasketFragment : Fragment() {
             if (basket.isNotEmpty()) {
                 var subtotal = 0.0
                 for (prod in basket) {
-                    subtotal += prod.itemInBasket * prod.price
+                    subtotal += prod.totalProductPrice
                 }
                 binding.tvTotalAmount.text = String.format("Php %.2f", subtotal)
             } else {

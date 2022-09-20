@@ -159,6 +159,48 @@
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintTop_toBottomOf="@+id/tvNotes"/>
 
+    <LinearLayout
+        android:id="@+id/quantity_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/glTopButton"
+        app:layout_constraintEnd_toEndOf="@id/glEnd"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_marginBottom="@dimen/small_margin">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnMinus"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_minus"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/quantity"
+            android:textSize="@dimen/medium_font"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_gravity="center"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnPlus"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_plus"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btAddToBasket"
         android:layout_width="350dp"

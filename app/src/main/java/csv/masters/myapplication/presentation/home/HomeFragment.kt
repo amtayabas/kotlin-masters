@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -27,6 +28,8 @@ class HomeFragment : Fragment() {
 
     private var dataStoreManager: DataStoreManager? = null
     private var basketManager: BasketManager? = null
+    private var progressBar: ProgressBar? = null
+    private var quantityCounter: Int = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +41,9 @@ class HomeFragment : Fragment() {
 
         dataStoreManager = DataStoreManager(requireContext())
         basketManager = BasketManager(dataStoreManager!!)
+
+        progressBar = binding.progressBar
+        progressBar!!.visibility = View.VISIBLE
 
         fetchProducts()
 
@@ -61,6 +67,7 @@ class HomeFragment : Fragment() {
             try {
                 val response = api.getProducts()
                 if (response.isSuccessful) {
+                    progressBar!!.visibility = View.GONE
                     coffeeItems = response.body()!!
                     setupAdapterList()
                 } else {
@@ -82,6 +89,9 @@ class HomeFragment : Fragment() {
         }
 
         adapter.setOnAddToCartClickListener {
+            val totalProductPrice = it.price*quantityCounter
+            it!!.quantity = quantityCounter
+            it!!.totalProductPrice = totalProductPrice
             Log.d(LOG_TAG, "Add to basket: ${it.name}")
             viewLifecycleOwner.lifecycleScope.launch {
                 basketManager!!.Operations().addToBasket(it)

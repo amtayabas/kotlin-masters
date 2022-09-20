@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import csv.masters.myapplication.R
 import csv.masters.myapplication.data.local.BasketManager
 import csv.masters.myapplication.data.local.DataStoreManager
 import csv.masters.myapplication.data.remote.dto.product.Product
@@ -24,6 +25,9 @@ class ProductDetailFragment : Fragment() {
     private var basketManager: BasketManager? = null
 
     private var selectedProduct: Product? = null
+    private var isUpdatingBasket: Boolean = false
+    private var quantityCounter: Int = 1
+    private var totalPrice: Float = 0.0F
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,16 +36,22 @@ class ProductDetailFragment : Fragment() {
         binding = FragmentProductDetailBinding.inflate(inflater, container, false)
 
         val args = arguments?.let {
-            ProductDetailFragmentArgs.fromBundle(
-                it
-            )
+            ProductDetailFragmentArgs.fromBundle(it)
         }
 
         if (args != null) {
+            isUpdatingBasket = args.editProduct
             selectedProduct = args.selectedProduct
+
+            if (isUpdatingBasket) {
+                setupUpdateView()
+            } else {
+                setupView()
+            }
+
             dataStoreManager = DataStoreManager(requireContext())
             basketManager = BasketManager(dataStoreManager!!)
-            setupView()
+            Log.d(">>args", args.toString())
         } else {
             findNavController().navigateUp()
         }
@@ -75,10 +85,14 @@ class ProductDetailFragment : Fragment() {
                     .load(it.image)
                     .into(ivProduct)
 
-                val buttonText = "ADD TO BASKET - ${String.format("%.2f", it.price)}"
+                totalPrice = computeTotalPrice(quantityCounter, it.price)
+
+                val buttonText = getString(R.string.add_to_basket, String.format("%.2f", totalPrice))
 
                 btAddToBasket.text = buttonText
                 btAddToBasket.setOnClickListener {
+                    selectedProduct!!.quantity = quantityCounter
+                    selectedProduct!!.totalProductPrice = totalPrice
                     Log.d(LOG_TAG, "Add to basket: ${selectedProduct!!.name}")
                     viewLifecycleOwner.lifecycleScope.launch {
                         basketManager!!.Operations().addToBasket(selectedProduct!!)
@@ -88,6 +102,68 @@ class ProductDetailFragment : Fragment() {
 
             }
         }
+    }
+
+    private fun setupUpdateView() {
+        with(binding) {
+            selectedProduct?.let {
+
+                val productPrice = it.price
+                quantityCounter = it.quantity
+
+                tvProductName.text = it.name
+                tvPrice.text = String.format("Php %.2f", it.price)
+                tvDescription.text = it.description
+
+                Glide.with(requireContext())
+                    .load(it.image)
+                    .into(ivProduct)
+
+                textViewQuantity.text = getString(R.string.quantity, it.quantity.toString())
+
+                val buttonText = getString(R.string.update_basket, String.format("%.2f", it.totalProductPrice))
+                btAddToBasket.text = buttonText
+
+                quantityLayout.visibility = View.VISIBLE
+                btnPlus.setOnClickListener {
+                    quantityCounter++
+                    textViewQuantity.text = getString(R.string.quantity, quantityCounter.toString())
+                    setUpdateButtonText(quantityCounter, productPrice)
+                    totalPrice = computeTotalPrice(quantityCounter, productPrice)
+                }
+
+                btnMinus.setOnClickListener {
+                    if (quantityCounter > 1) {
+                        quantityCounter--
+                        textViewQuantity.text = getString(R.string.quantity, quantityCounter.toString())
+                        setUpdateButtonText(quantityCounter, productPrice)
+                        totalPrice = computeTotalPrice(quantityCounter, productPrice)
+                    }
+                }
+
+                btAddToBasket.setOnClickListener {
+                        selectedProduct!!.quantity = quantityCounter
+                        selectedProduct!!.totalProductPrice = totalPrice
+                        Log.d(LOG_TAG, "Update basket: ${selectedProduct!!.name}")
+                        viewLifecycleOwner.lifecycleScope.launch {
+                            basketManager!!.Operations().updateFromBasket(selectedProduct!!)
+                        }
+                        Toast.makeText(requireContext(), "${selectedProduct!!.name} updated to basket", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun setUpdateButtonText(counter: Int, price: Float) {
+        with(binding) {
+            val totalPrice = price*counter
+            val buttonText = getString(R.string.update_basket, String.format("%.2f", totalPrice))
+            btAddToBasket.text = buttonText
+        }
+    }
+
+    private fun computeTotalPrice(counter: Int, price: Float): Float {
+        return price*counter
     }
 
     companion object {

@@ -3,12 +3,14 @@ package csv.masters.myapplication.presentation.basket.adapter
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import csv.masters.myapplication.R
 import csv.masters.myapplication.data.remote.dto.product.Product
 import csv.masters.myapplication.databinding.ItemBasketProductBinding
+import csv.masters.myapplication.presentation.basket.BasketFragmentDirections
 
 class BasketItemAdapter : RecyclerView.Adapter<BasketItemAdapter.ViewHolder>() {
 
@@ -38,19 +40,19 @@ class BasketItemAdapter : RecyclerView.Adapter<BasketItemAdapter.ViewHolder>() {
 
             with(holder.binding) {
                 tvProductName.text = product.name
-                tvSizes.text = "Large (24 oz)"
-                tvAddOns.text = "Extra espresso"
-                tvPrice.text = String.format("Php %.2f", product.price * product.itemInBasket)
-                tvQuantity.text = product.itemInBasket.toString()
+                tvSizes.text = context.getString(R.string.sizes)
+                tvAddOns.text = context.getString(R.string.add_ons)
+                tvPrice.text = String.format("Php %.2f", product.totalProductPrice)
+                tvQuantity.text = product.quantity.toString()
 
                 tvEdit.text = context.getString(R.string.edit)
                 tvEdit.paintFlags = Paint.UNDERLINE_TEXT_FLAG
             }
 
-            setOnClickListener {
+            holder.binding.tvEdit.setOnClickListener {
+                findNavController().navigate(BasketFragmentDirections.actionBasketFragmentToProductDetailFragment(product))
                 onItemClickListener?.let { it(product) }
             }
-
         }
     }
 

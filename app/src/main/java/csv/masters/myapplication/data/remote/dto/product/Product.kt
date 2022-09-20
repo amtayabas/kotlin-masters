@@ -17,5 +17,7 @@ data class Product(
     @SerializedName("sizes")
     val sizes: String,
 
-    var itemInBasket: Int = 0
+    var itemInBasket: Int = 0,
+    var totalProductPrice: Float,
+    var quantity: Int = 1
 ): Parcelable

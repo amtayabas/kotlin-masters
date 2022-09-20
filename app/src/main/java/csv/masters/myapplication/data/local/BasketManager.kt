@@ -44,7 +44,21 @@ class BasketManager constructor(private val dataStoreManager: DataStoreManager) 
             return basket
         }
 
-        suspend fun isProductInBasket(product: Product): Boolean {
+        suspend fun updateFromBasket(product: Product): ArrayList<Product> {
+            val basket = getBasket()
+            val productInBasket =
+                basket.firstOrNull { prod -> prod.name == product.name && prod.description == product.description }
+            if (isProductInBasket(product)) {
+                if (productInBasket != null) {
+                    basket.set(basket.indexOf(productInBasket), product)
+                }
+            }
+
+            dataStoreManager.putObject(Constants.BASKET_OBJECT, basket, ArrayList::class.java)
+            return basket
+        }
+
+        private suspend fun isProductInBasket(product: Product): Boolean {
             val basket = getBasket()
             return (basket.isNotEmpty() && basket.find { prod -> prod.name == product.name && prod.description == product.description } != null)
         }
