@@ -26,6 +26,9 @@ class SignUpActivity : AppCompatActivity() {
     private fun setupView() {
         headerBinding = binding.header
         headerBinding.tvTitle.text = getString(R.string.signUp)
+        headerBinding.ivBack.setOnClickListener {
+            onBackPressed()
+        }
 
         with(binding) {
             tvPhoneNumber.text = getString(R.string.phone_number)
