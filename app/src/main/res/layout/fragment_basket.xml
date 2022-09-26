@@ -210,8 +210,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonPlaceOrder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
         android:layout_margin="10dp"
         android:background="@drawable/button_bg"
         android:gravity="center"
