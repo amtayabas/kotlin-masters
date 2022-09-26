@@ -38,9 +38,9 @@ class BasketFragment : Fragment() {
                 tvOrderSummary.text = "Order Summary"
                 tvPaymentDetails.text = "Payment Details"
                 rbCash.text = "Cash"
-                rbCreditCard.text = "Credit Card"
+                rbCreditCard.text = "Credit Card (VISA9524)"
                 tvTotal.text = "Total"
-                buttonPlaceOrder.text = "PlaceOrder"
+                buttonPlaceOrder.text = "Place Order"
 
 
                 fun onRadioButtonClicked(view: View) {

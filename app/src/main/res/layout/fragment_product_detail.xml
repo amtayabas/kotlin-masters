@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".07" />
+        app:layout_constraintGuide_percent=".05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glButtonTop"
@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".93" />
+        app:layout_constraintGuide_percent=".95" />
 
 
     <ImageButton
@@ -70,7 +70,8 @@
         android:layout_height="30dp"
         android:src="@drawable/icn_close"
         app:layout_constraintStart_toStartOf="@+id/glStart"
-        app:layout_constraintTop_toTopOf="@+id/glTop" />
+        app:layout_constraintTop_toTopOf="@+id/glTop"
+        android:background="@color/white"/>
 
     <ImageView
         android:id="@+id/ivProduct"
@@ -89,6 +90,7 @@
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif"
+        android:paddingLeft="5dp"
         android:text="Iced Latte"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
         android:textColor="@color/black"
@@ -103,6 +105,7 @@
         android:layout_width="100dp"
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
+        android:gravity="right"
         android:text="Php 60.00"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -114,11 +117,12 @@
         android:id="@+id/tvDescription"
         android:layout_width="350dp"
         android:layout_height="25dp"
+        android:paddingLeft="5dp"
         android:text="Espresso and chilled milk poured over ice"
         android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textColor="@color/dark_gray"
         android:textSize="15dp"
         android:textStyle="bold"
-        android:textColor="@color/dark_gray"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintTop_toBottomOf="@id/tvProduct" />
@@ -129,6 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/size"
+        android:paddingLeft="5dp"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/dark_gray"
@@ -156,6 +161,7 @@
             android:id="@+id/rbRegular"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
+            android:layout_marginTop="10dp"
             android:text="Regular (12oz)"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -171,7 +177,7 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
-            android:text="Large(24oz)"
+            android:text="Tall (16oz)"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -185,7 +191,8 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
-            android:text="Tall (16oz)"
+            android:layout_marginBottom="10dp"
+            android:text="Large(24oz)"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -245,10 +252,13 @@
         android:id="@+id/tvAddon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Adds-on"
-        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="10dp"
+        android:text="Add-on"
+        android:textColor="@color/dark_gray"
         android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearAddon"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/glStart"
@@ -259,6 +269,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/glStart"
@@ -269,7 +280,6 @@
             android:id="@+id/checkBox1"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:layout_marginTop="10dp"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -352,9 +362,10 @@
         android:id="@+id/tvNotes"
         android:layout_width="350dp"
         android:layout_height="25dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="5dp"
         android:text="Notes"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textColor="@color/dark_gray"
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tvNotesDescription"
@@ -367,8 +378,9 @@
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:hint="Add your request"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
-        android:textSize="18dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/gray"
+        android:textSize="17dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintStart_toStartOf="@id/glStart"
@@ -376,6 +388,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/ButtonAdd"
         android:layout_width="350dp"
         android:layout_height="45dp"
         android:background="@drawable/bg_add_to_basket"
