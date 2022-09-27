@@ -70,6 +70,18 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tvMobileNoError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        app:layout_constraintEnd_toStartOf="@+id/glEnd"
+        app:layout_constraintHorizontal_bias="0.007"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumberLayout"
+        tools:text="@string/invalid_mobile_number"
+        android:textColor="@color/red"/>
+
     <LinearLayout
         android:id="@+id/emailLayout"
         android:layout_width="0dp"
@@ -98,6 +110,17 @@
             android:drawablePadding="8dp"
             android:textSize="@dimen/medium_font"/>
 
+        <TextView
+            android:id="@+id/tvEmailAddError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/glEnd"
+            app:layout_constraintHorizontal_bias="0.007"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@+id/phoneNumberLayout"
+            tools:text="@string/email_error"
+            android:textColor="@color/red"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -123,6 +146,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
+            android:hint="@string/signup_name_hint"
             android:singleLine="true"
             android:textSize="@dimen/medium_font"/>
 
