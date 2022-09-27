@@ -3,6 +3,8 @@ package csv.masters.myapplication.presentation.signup
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import csv.masters.myapplication.R
@@ -14,6 +16,8 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var headerBinding: LayoutSignupHeaderBinding
+    private lateinit var mobileNoError: TextView
+    private lateinit var emailAddError: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,17 +40,30 @@ class SignUpActivity : AppCompatActivity() {
             tvName.text = getString(R.string.name)
             btnNext.text = getString(R.string.next_button)
             tvFooterText.text = getString(R.string.footer_text)
+            tvMobileNoError.text = getString(R.string.invalid_mobile_number)
+            this@SignUpActivity.mobileNoError = tvMobileNoError
+            tvMobileNoError.visibility = View.GONE
+            tvEmailAddError.text = getString(R.string.email_error)
+            this@SignUpActivity.emailAddError = tvEmailAddError
+            tvEmailAddError.visibility = View.GONE
         }
 
         binding.btnNext.setOnClickListener {
             if (isTextFieldNotEmpty()) {
-                if (isEmailValid()) {
-                    val intent = Intent(this, ConfirmCodeActivity::class.java).apply {
-                        putExtra(PHONE_NUMBER, binding.ccp.selectedCountryCode + binding.phoneNumber.text)
+                if (isPhoneNumberValid()) {
+                    if (isEmailValid()) {
+                        val intent = Intent(this, ConfirmCodeActivity::class.java).apply {
+                            putExtra(
+                                PHONE_NUMBER,
+                                binding.ccp.selectedCountryCode + binding.phoneNumber.text
+                            )
+                        }
+                        startActivity(intent)
+                    } else {
+                        emailAddError.visibility = View.VISIBLE
                     }
-                    startActivity(intent)
                 } else {
-                    Toast.makeText(this, R.string.invalid_email, Toast.LENGTH_SHORT).show()
+                    mobileNoError.visibility = View.VISIBLE
                 }
             } else {
                 Toast.makeText(this, R.string.empty_message, Toast.LENGTH_SHORT).show()
@@ -62,5 +79,9 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun isEmailValid(): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(binding.email.text.toString()).matches()
+    }
+
+    private fun isPhoneNumberValid(): Boolean {
+        return Patterns.PHONE.matcher(binding.phoneNumber.text.toString()).matches()
     }
 }
