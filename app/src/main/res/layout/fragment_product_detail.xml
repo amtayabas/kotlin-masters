@@ -157,7 +157,6 @@
             android:text="Regular (12oz)"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold"
             android:paddingLeft="10dp"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintStart_toStartOf="@id/glStart"
@@ -172,7 +171,6 @@
             android:text="Tall (16oz)"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold"
             android:paddingLeft="10dp"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintStart_toStartOf="@id/glStart"
@@ -187,7 +185,6 @@
             android:text="Large(24oz)"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold"
             android:paddingLeft="10dp"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintStart_toStartOf="@id/glStart"
@@ -274,7 +271,6 @@
             android:layout_height="25dp"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:paddingLeft="10dp"
             android:text="Caramel drizzle" />
 
@@ -285,7 +281,6 @@
             android:layout_marginTop="10dp"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:paddingLeft="10dp"
             android:text="Hazelnut syrup"
             app:layout_constraintTop_toBottomOf="@+id/checkBox1" />
@@ -297,7 +292,6 @@
             android:layout_marginTop="10dp"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:paddingLeft="10dp"
             android:text="Toffee nut syrup"
             app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
