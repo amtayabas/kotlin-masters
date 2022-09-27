@@ -44,7 +44,7 @@ class ProductDetailFragment : Fragment() {
             selectedProduct = args.selectedProduct
 
             if (isUpdatingBasket) {
-                setupUpdateView()
+               // setupUpdateView()
             } else {
                 setupView()
             }
@@ -77,7 +77,7 @@ class ProductDetailFragment : Fragment() {
     private fun setupView() {
         with(binding) {
             selectedProduct?.let {
-                tvProductName.text = it.name
+                tvProduct.text = it.name
                 tvPrice.text = String.format("Php %.2f", it.price)
                 tvDescription.text = it.description
 
@@ -89,8 +89,8 @@ class ProductDetailFragment : Fragment() {
 
                 val buttonText = getString(R.string.add_to_basket, String.format("%.2f", totalPrice))
 
-                btAddToBasket.text = buttonText
-                btAddToBasket.setOnClickListener {
+                buttonAdd.text = buttonText
+                buttonAdd.setOnClickListener {
                     selectedProduct!!.quantity = quantityCounter
                     selectedProduct!!.totalProductPrice = totalPrice
                     Log.d(LOG_TAG, "Add to basket: ${selectedProduct!!.name}")
@@ -111,7 +111,7 @@ class ProductDetailFragment : Fragment() {
                 val productPrice = it.price
                 quantityCounter = it.quantity
 
-                tvProductName.text = it.name
+                tvProduct.text = it.name
                 tvPrice.text = String.format("Php %.2f", it.price)
                 tvDescription.text = it.description
 
@@ -122,7 +122,7 @@ class ProductDetailFragment : Fragment() {
                 textViewQuantity.text = getString(R.string.quantity, it.quantity.toString())
 
                 val buttonText = getString(R.string.update_basket, String.format("%.2f", it.totalProductPrice))
-                btAddToBasket.text = buttonText
+                buttonAdd.text = buttonText
 
                 quantityLayout.visibility = View.VISIBLE
                 btnPlus.setOnClickListener {
@@ -141,7 +141,7 @@ class ProductDetailFragment : Fragment() {
                     }
                 }
 
-                btAddToBasket.setOnClickListener {
+                buttonAdd.setOnClickListener {
                         selectedProduct!!.quantity = quantityCounter
                         selectedProduct!!.totalProductPrice = totalPrice
                         Log.d(LOG_TAG, "Update basket: ${selectedProduct!!.name}")
@@ -158,7 +158,7 @@ class ProductDetailFragment : Fragment() {
         with(binding) {
             val totalPrice = price*counter
             val buttonText = getString(R.string.update_basket, String.format("%.2f", totalPrice))
-            btAddToBasket.text = buttonText
+            buttonAdd.text = buttonText
         }
     }
 
