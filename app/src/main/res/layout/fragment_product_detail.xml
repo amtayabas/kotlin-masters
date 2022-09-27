@@ -108,7 +108,7 @@
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="350dp"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:paddingLeft="5dp"
         android:text="Espresso and chilled milk poured over ice"
         android:textAppearance="@style/TextAppearance.AppCompat.Display4"
@@ -117,7 +117,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/tvProduct" />
+        app:layout_constraintTop_toBottomOf="@id/tvProduct"
+        android:lines="2"/>
 
     <TextView
         android:id="@+id/tvSize"
