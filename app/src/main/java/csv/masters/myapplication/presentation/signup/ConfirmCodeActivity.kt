@@ -11,6 +11,7 @@ import csv.masters.myapplication.MainActivity
 import csv.masters.myapplication.R
 import csv.masters.myapplication.databinding.ActivityConfirmCodeBinding
 import csv.masters.myapplication.databinding.LayoutSignupHeaderBinding
+import csv.masters.myapplication.presentation.home.HomeActivity
 
 class ConfirmCodeActivity : AppCompatActivity() {
 
@@ -71,7 +72,7 @@ class ConfirmCodeActivity : AppCompatActivity() {
                         } else {
                             tvErrorMessage.visibility = View.GONE
                             remainingRetry = MAX_RETRY
-                            startActivity(Intent(this@ConfirmCodeActivity, MainActivity::class.java))
+                            startActivity(Intent(this@ConfirmCodeActivity, HomeActivity::class.java))
                         }
                     } else {
                         tvErrorMessage.visibility = View.GONE
