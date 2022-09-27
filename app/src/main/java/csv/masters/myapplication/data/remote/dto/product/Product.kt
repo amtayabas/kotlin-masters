@@ -1,7 +1,10 @@
 package csv.masters.myapplication.data.remote.dto.product
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Product(
     @SerializedName("description")
     val description: String,
@@ -10,7 +13,11 @@ data class Product(
     @SerializedName("name")
     val name: String,
     @SerializedName("price")
-    val price: Int,
+    val price: Float,
     @SerializedName("sizes")
-    val sizes: String
-)
+    val sizes: String,
+
+    var itemInBasket: Int = 0,
+    var totalProductPrice: Float,
+    var quantity: Int = 1
+): Parcelable

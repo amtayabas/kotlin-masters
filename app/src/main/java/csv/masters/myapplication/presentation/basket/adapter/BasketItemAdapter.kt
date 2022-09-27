@@ -1,17 +1,20 @@
-package csv.masters.myapplication.presentation.home.adapter
+package csv.masters.myapplication.presentation.basket.adapter
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import csv.masters.myapplication.R
 import csv.masters.myapplication.data.remote.dto.product.Product
-import csv.masters.myapplication.databinding.ItemProductBinding
+import csv.masters.myapplication.databinding.ItemBasketProductBinding
+import csv.masters.myapplication.presentation.basket.BasketFragmentDirections
 
-class CoffeeItemAdapter : RecyclerView.Adapter<CoffeeItemAdapter.ViewHolder>() {
+class BasketItemAdapter : RecyclerView.Adapter<BasketItemAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemBasketProductBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
@@ -27,7 +30,7 @@ class CoffeeItemAdapter : RecyclerView.Adapter<CoffeeItemAdapter.ViewHolder>() {
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemBasketProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -37,22 +40,19 @@ class CoffeeItemAdapter : RecyclerView.Adapter<CoffeeItemAdapter.ViewHolder>() {
 
             with(holder.binding) {
                 tvProductName.text = product.name
-                tvSizes.text = product.sizes
-                tvPrice.text = String.format("Php %.2f", product.price)
+                tvSizes.text = context.getString(R.string.sizes)
+                tvAddOns.text = context.getString(R.string.add_ons)
+                tvPrice.text = String.format("Php %.2f", product.totalProductPrice)
+                tvQuantity.text = product.quantity.toString()
 
-                Glide.with(this@apply)
-                    .load(product.image)
-                    .into(imgProduct)
-
-                btAddToBasket.setOnClickListener {
-                    onAddToCartClickListener?.let { it(product) }
-                }
+                tvEdit.text = context.getString(R.string.edit)
+                tvEdit.paintFlags = Paint.UNDERLINE_TEXT_FLAG
             }
 
-            setOnClickListener {
+            holder.binding.tvEdit.setOnClickListener {
+                findNavController().navigate(BasketFragmentDirections.actionBasketFragmentToProductDetailFragment(product))
                 onItemClickListener?.let { it(product) }
             }
-
         }
     }
 
@@ -61,13 +61,8 @@ class CoffeeItemAdapter : RecyclerView.Adapter<CoffeeItemAdapter.ViewHolder>() {
     }
 
     private var onItemClickListener: ((Product) -> Unit)? = null
-    private var onAddToCartClickListener: ((Product) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (Product) -> Unit) {
         onItemClickListener = listener
-    }
-
-    fun setOnAddToCartClickListener(listener: (Product) -> Unit) {
-        onAddToCartClickListener = listener
     }
 }

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.KotlinMasters" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.KotlinMasters" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -14,4 +14,10 @@
         <!-- Customize your theme here. -->
         <item name="android:color">@color/black</item>
     </style>
+
+    <style name="Theme.KotlinMasters.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>

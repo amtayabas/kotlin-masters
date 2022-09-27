@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="csv.masters.myapplication.presentation.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="Cold Brew"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_productDetailFragment"
@@ -17,15 +17,37 @@
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="csv.masters.myapplication.presentation.productdetail.ProductDetailFragment"
-        android:label="fragment_product_detail"
+        android:label="Product Detail"
         tools:layout="@layout/fragment_product_detail" >
         <action
             android:id="@+id/action_productDetailFragment_to_basketFragment"
-            app:destination="@id/basketFragment" />
+            app:destination="@id/basketFragment">
+        </action>
+
+        <argument
+            android:name="selectedProduct"
+            app:argType="csv.masters.myapplication.data.remote.dto.product.Product" />
+
+        <argument
+            android:name="editProduct"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+
     </fragment>
     <fragment
         android:id="@+id/basketFragment"
         android:name="csv.masters.myapplication.presentation.basket.BasketFragment"
-        android:label="fragment_basket"
-        tools:layout="@layout/fragment_basket" />
+        android:label="My Basket"
+        tools:layout="@layout/fragment_basket">
+        <action
+            android:id="@+id/action_basketFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" >
+
+            <argument
+                android:name="editProduct"
+                app:argType="boolean"
+                android:defaultValue="true" />
+
+        </action>
+    </fragment>
 </navigation>

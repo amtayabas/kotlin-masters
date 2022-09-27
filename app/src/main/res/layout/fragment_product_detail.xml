@@ -29,6 +29,7 @@
         app:layout_constraintGuide_percent=".50" />
 
     <androidx.constraintlayout.widget.Guideline
+<<<<<<< HEAD
         android:id="@+id/glMidBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,6 +38,37 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glStart"
+=======
+        android:id="@+id/glTopNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glBottomNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".56" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glTopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glBottomButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".92" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glStartLogo"
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -63,6 +95,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".95" />
 
+<<<<<<< HEAD
 
     <ImageButton
         android:id="@+id/ibCloseBtn"
@@ -73,6 +106,8 @@
         app:layout_constraintTop_toTopOf="@+id/glTop"
         android:background="@color/white"/>
 
+=======
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
     <ImageView
         android:id="@+id/ivProduct"
         android:layout_width="124dp"
@@ -85,7 +120,7 @@
         tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/tvProduct"
+        android:id="@+id/tvProductName"
         android:layout_width="250dp"
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
@@ -110,22 +145,34 @@
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
+<<<<<<< HEAD
         app:layout_constraintStart_toEndOf="@id/tvProduct"
         app:layout_constraintTop_toBottomOf="@id/ivProduct" />
+=======
+        app:layout_constraintStart_toEndOf="@id/tvProductName"/>
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="350dp"
+<<<<<<< HEAD
         android:layout_height="25dp"
         android:paddingLeft="5dp"
+=======
+        android:layout_height="wrap_content"
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
         android:text="Espresso and chilled milk poured over ice"
         android:textAppearance="@style/TextAppearance.AppCompat.Display4"
         android:textColor="@color/dark_gray"
         android:textSize="15dp"
         android:textStyle="bold"
+<<<<<<< HEAD
+=======
+        android:layout_marginTop="8dp"
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/tvProduct" />
+        app:layout_constraintTop_toBottomOf="@id/tvProductName" />
 
     <TextView
         android:id="@+id/tvSize"
@@ -387,16 +434,70 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNotes" />
 
 
+    <LinearLayout
+        android:id="@+id/quantity_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/glTopButton"
+        app:layout_constraintEnd_toEndOf="@id/glEnd"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_marginBottom="@dimen/small_margin">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnMinus"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_minus"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/quantity"
+            android:textSize="@dimen/medium_font"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_gravity="center"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnPlus"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_plus"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
     <androidx.appcompat.widget.AppCompatButton
+<<<<<<< HEAD
         android:id="@+id/ButtonAdd"
+=======
+        android:id="@+id/btAddToBasket"
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
         android:layout_width="350dp"
         android:layout_height="45dp"
         android:background="@drawable/bg_add_to_basket"
         android:text="ADD TO BASKET - 60.00"
+<<<<<<< HEAD
         android:textColor="@color/dark_gray"
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/glButtonBottom"
+=======
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="@id/glTopButton"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintStart_toStartOf="@id/glStart" />
 

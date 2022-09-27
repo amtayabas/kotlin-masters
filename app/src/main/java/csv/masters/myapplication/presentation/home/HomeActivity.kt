@@ -1,21 +1,21 @@
 package csv.masters.myapplication.presentation.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
 import csv.masters.myapplication.R
 import csv.masters.myapplication.databinding.ActivityHomeBinding
-import csv.masters.myapplication.presentation.basket.BasketFragment
-import csv.masters.myapplication.presentation.productdetail.ProductDetailFragment
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var toggle: ActionBarDrawerToggle
+
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,48 +26,28 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setUpView() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navFragment) as NavHostFragment
-        setupActionBarWithNavController(navHostFragment.navController)
+        setSupportActionBar(binding.toolbar)
+        val drawerLayout = binding.drawerLayout
+        val navView: NavigationView = binding.navigationView
+        val navController = findNavController(R.id.navFragment)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.homeFragment, R.id.basketFragment
+            ), drawerLayout
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
-        binding.apply {
-            toggle = ActionBarDrawerToggle(this@HomeActivity, drawerLayout, R.string.open, R.string.close)
-            drawerLayout.addDrawerListener(toggle)
-            toggle.syncState()
-
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.title = "Coffee Master"
-
-            navigationView.setNavigationItemSelectedListener {
-                it.isChecked = true
-
-                when(it.itemId) {
-                    R.id.homeFragment -> {
-                        replaceFragment(HomeFragment(), "Home")
-                    }
-                    R.id.basketFragment -> {
-                        replaceFragment(BasketFragment(), "Basket")
-                    }
-                    R.id.productDetailFragment -> {
-                        replaceFragment(ProductDetailFragment(), "Product Detail")
-                    }
-                }
-                true
-            }
-        }
     }
 
-    private fun replaceFragment(fragment: Fragment, title: String) {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.navFragment, fragment)
-        fragmentTransaction.commit()
-        binding.drawerLayout.closeDrawers()
-    }
+    // NOTE: Can be used for settings (Kebab Menu)
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.main_drawer, menu)
+//        return true
+//    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true
-        }
-        return super.onOptionsItemSelected(item)
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.navFragment)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

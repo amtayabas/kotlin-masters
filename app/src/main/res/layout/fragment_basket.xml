@@ -6,22 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".presentation.basket.BasketFragment">
 
+<<<<<<< HEAD
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glStart"
+=======
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glMainStart"
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
+<<<<<<< HEAD
         android:id="@+id/glEnd"
+=======
+        android:id="@+id/glMainEnd"
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".95" />
 
     <androidx.constraintlayout.widget.Guideline
+<<<<<<< HEAD
         android:id="@+id/glLowerBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,11 +40,15 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glButtonBottom"
+=======
+        android:id="@+id/glBottom"
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".95" />
 
+<<<<<<< HEAD
 
     <ImageButton
         android:id="@+id/ibCloseBtn"
@@ -180,8 +194,85 @@
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+=======
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/view"
+        android:fillViewport="true">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".95" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivDelete"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_delete"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/glEnd"/>
+
+            <TextView
+                android:id="@+id/tvDeliverTo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Deliver to"
+                android:textColor="@color/dark_gray"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/glEnd"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintTop_toBottomOf="@+id/ivDelete" />
+
+            <EditText
+                android:id="@+id/etSelectLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="05dp"
+                android:drawableEnd="@drawable/icn_pin"
+                android:hint="Select location"
+                android:paddingLeft="20dp"
+                android:textColorHint="@color/gray"
+                app:layout_constraintEnd_toEndOf="@id/glEnd"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintTop_toBottomOf="@id/tvDeliverTo" />
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
+
+            <TextView
+                android:id="@+id/tvOrderSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Order Summary"
+                android:textColor="@color/dark_gray"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/glEnd"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintTop_toBottomOf="@+id/etSelectLocation" />
+
+<<<<<<< HEAD
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/rbCreditCard"
             android:layout_width="wrap_content"
@@ -194,8 +285,56 @@
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintTop_toBottomOf="@+id/rbRegular" />
+=======
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cartItemsRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/glEnd"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintTop_toBottomOf="@+id/tvOrderSummary" />
 
+            <TextView
+                android:id="@+id/tvPaymentDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Payment Details"
+                android:textColor="@color/dark_gray"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintTop_toBottomOf="@+id/cartItemsRecyclerView" />
 
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintTop_toBottomOf="@+id/tvPaymentDetails">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbCash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Cash on delivery"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="15sp" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbCreditCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Credit card(VISA 9524)"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="15sp" />
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
+
+            </RadioGroup>
+
+<<<<<<< HEAD
     </RadioGroup>
 
     <View
@@ -211,23 +350,52 @@
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintTop_toBottomOf="@id/glLowerBottom" />
 
+=======
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toTopOf="@id/tvTotal"
+        app:layout_constraintEnd_toEndOf="@id/glMainEnd"
+        app:layout_constraintStart_toStartOf="@id/glMainStart" />
+
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
     <TextView
         android:id="@+id/tvTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_margin="10dp"
         android:layout_marginTop="44dp"
         android:layout_marginBottom="32dp"
         android:paddingLeft="10dp"
+=======
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
         android:text="Total"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
+<<<<<<< HEAD
         app:layout_constraintBottom_toTopOf="@+id/buttonPlaceOrder"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintTop_toBottomOf="@+id/view" />
+=======
+        app:layout_constraintBottom_toTopOf="@id/buttonPlaceOrder"
+        app:layout_constraintEnd_toEndOf="@id/glMainEnd"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/glMainStart" />
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
 
     <TextView
         android:id="@+id/tvTotalAmount"
@@ -235,11 +403,15 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginTop="8dp"
+<<<<<<< HEAD
         android:layout_marginBottom="32dp"
+=======
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
         android:text="Php 300.00"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
+<<<<<<< HEAD
         app:layout_constraintBottom_toTopOf="@+id/buttonPlaceOrder"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintHorizontal_bias="0.955"
@@ -261,5 +433,25 @@
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
+=======
+        app:layout_constraintBottom_toTopOf="@id/buttonPlaceOrder"
+        app:layout_constraintEnd_toEndOf="@id/glMainEnd"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/glMainStart" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonPlaceOrder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_button"
+        android:gravity="center"
+        android:text="Place order"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/glBottom"
+        app:layout_constraintEnd_toEndOf="@id/glMainEnd"
+        app:layout_constraintStart_toStartOf="@id/glMainStart" />
+>>>>>>> 37f20f120c9677cfa4cecbbced0648e66aa44888
 
 </androidx.constraintlayout.widget.ConstraintLayout>

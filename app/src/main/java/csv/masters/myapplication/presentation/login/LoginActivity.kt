@@ -1,16 +1,15 @@
 package csv.masters.myapplication.presentation.login
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import csv.masters.myapplication.R
 import csv.masters.myapplication.databinding.ActivityLoginBinding
-import csv.masters.myapplication.presentation.signup.SignUpActivity
+import csv.masters.myapplication.databinding.LayoutSignupHeaderBinding
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var headerBinding: LayoutSignupHeaderBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,33 +20,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        with(binding) {
-            btnFb.text = getString(R.string.continue_with_facebook)
-            btnGoogle.text = getString(R.string.continue_with_google)
-            btnApple.text = getString(R.string.continue_with_apple)
-            btnNumber.text = getString(R.string.continue_with_number)
-
-            btnFb.setOnClickListener {
-                gotoNextPage("Facebook")
-            }
-
-            btnGoogle.setOnClickListener {
-                gotoNextPage("Google")
-            }
-
-            btnApple.setOnClickListener {
-                gotoNextPage("Apple")
-            }
-
-            btnNumber.setOnClickListener {
-                startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
-            }
+        headerBinding = binding.header
+        headerBinding.tvTitle.text = getString(R.string.login)
+        headerBinding.ivBack.setOnClickListener {
+            onBackPressed()
         }
     }
-
-    private fun gotoNextPage(nextPage: String) {
-       Toast.makeText(applicationContext, "Continue with $nextPage...", Toast.LENGTH_SHORT).show()
-    }
 }
-
-

@@ -14,10 +14,10 @@
         app:layout_constraintGuide_percent=".03"/>
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivHamburger"
+        android:id="@+id/ivBack"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/icn_menu"
+        android:src="@drawable/icn_back"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintTop_toTopOf="parent"
