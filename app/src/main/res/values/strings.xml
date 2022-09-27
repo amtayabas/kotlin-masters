@@ -50,6 +50,11 @@
     <string name="quantity"><u>QTY: %1$s</u></string>
     <string name="sizes">Large (24 oz)</string>
     <string name="add_ons">Extra espress</string>
+    <string name="button_basket">BASKET (%1$s) - %2$s</string>
+    <plurals name="items_plural">
+        <item quantity="one">%1$s item</item>
+        <item quantity="other">%1$s items</item>
+    </plurals>
     <string name="signup_name_hint">What should people call you?</string>
     <string name="email_error">Incorrect email format</string>
     <string name="invalid_mobile_number">Invalid mobile number</string>
