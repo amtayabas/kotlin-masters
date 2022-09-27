@@ -22,6 +22,94 @@
 
     <include
         android:id="@+id/header"
-        layout="@layout/layout_signup_header"/>
+        layout="@layout/layout_signup_header"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+        app:layout_constraintEnd_toEndOf="@id/glEnd"/>
+
+    <TextView
+        android:id="@+id/tvPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/phone_number"
+        android:layout_marginTop="@dimen/xlarge_margin"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
+
+    <LinearLayout
+        android:id="@+id/phoneNumberLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+        app:layout_constraintEnd_toEndOf="@id/glEnd"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber">
+
+        <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:gravity="start|center"
+            android:layout_weight="0.2"
+            app:ccp_defaultNameCode="PH"
+            app:ccp_hideNameCode="true"
+            app:ccp_defaultCode="63"
+            app:ccp_hidePhoneCode="false"
+            app:ccp_textSize="@dimen/medium_font"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".6"
+            android:inputType="number"
+            android:lines="1"
+            android:singleLine="true"
+            android:textSize="@dimen/medium_font"
+            android:drawablePadding="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/passwordLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+        app:layout_constraintEnd_toEndOf="@id/glEnd"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumberLayout"
+        android:layout_marginTop="@dimen/xlarge_margin">
+
+    <TextView
+        android:id="@+id/tvPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Password"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumberLayout"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:singleLine="true"
+        android:drawablePadding="8dp"
+        android:textSize="@dimen/medium_font"/>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="@string/next_button"
+        android:textColor="@color/white"
+        android:background="@drawable/round_button"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/glEnd"
+        android:layout_marginBottom="@dimen/xlarge_margin"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
