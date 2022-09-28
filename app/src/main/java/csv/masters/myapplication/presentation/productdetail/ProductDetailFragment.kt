@@ -44,7 +44,7 @@ class ProductDetailFragment : Fragment() {
             selectedProduct = args.selectedProduct
 
             if (isUpdatingBasket) {
-               // setupUpdateView()
+                setupUpdateView()
             } else {
                 setupView()
             }
