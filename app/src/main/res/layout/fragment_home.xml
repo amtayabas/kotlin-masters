@@ -40,31 +40,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent=".05" />
+                app:layout_constraintGuide_percent=".02" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edittext_search"
-                android:layout_width="0dp"
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/glStart"
-                app:layout_constraintEnd_toEndOf="@id/glEnd"
+                app:queryBackground="@android:color/transparent"
+                android:background="@drawable/border_search"
+                app:searchIcon="@null"
+                app:iconifiedByDefault="false"
+                app:queryHint="Search"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintTop_toBottomOf="@id/glTop"
-                android:hint="@string/search"
-                android:imeOptions="actionSearch"
-                android:background="@drawable/round_button_bg_stroke"
-                app:drawableEndCompat="@drawable/ic_search"
-                android:padding="@dimen/medium_padding"/>
+                app:layout_constraintEnd_toEndOf="@id/glEnd"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintBottom_toTopOf="@id/recyclerView_name"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView_name"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/small_margin"
                 android:scrollbars="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/layout_basket"
                 app:layout_constraintEnd_toEndOf="@id/glEnd"
                 app:layout_constraintStart_toStartOf="@id/glStart"
-                app:layout_constraintTop_toBottomOf="@id/edittext_search" />
+                app:layout_constraintTop_toBottomOf="@id/searchView" />
 
             <include
                 android:id="@+id/layout_basket"

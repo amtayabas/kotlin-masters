@@ -1,15 +1,25 @@
 package csv.masters.myapplication.presentation.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Filterable
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import csv.masters.myapplication.R
+import csv.masters.myapplication.data.remote.dto.product.CoffeeResponseItem
+import csv.masters.myapplication.data.remote.dto.product.Product
 import csv.masters.myapplication.databinding.ActivityHomeBinding
+import csv.masters.myapplication.presentation.home.adapter.CoffeeItemAdapter
 
 class HomeActivity : AppCompatActivity() {
 
@@ -39,15 +49,10 @@ class HomeActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
     }
+}
 
     // NOTE: Can be used for settings (Kebab Menu)
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 //        menuInflater.inflate(R.menu.main_drawer, menu)
 //        return true
 //    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.navFragment)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-}

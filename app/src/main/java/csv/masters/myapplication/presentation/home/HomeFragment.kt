@@ -5,11 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import csv.masters.myapplication.R
 import csv.masters.myapplication.data.local.BasketManager
 import csv.masters.myapplication.data.local.DataStoreManager
@@ -21,6 +25,7 @@ import csv.masters.myapplication.data.repository.ProductsRepositoryImpl
 import csv.masters.myapplication.databinding.FragmentHomeBinding
 import csv.masters.myapplication.databinding.LayoutHomeWithBasketBinding
 import csv.masters.myapplication.presentation.home.adapter.CoffeeGroupAdapter
+import csv.masters.myapplication.presentation.home.adapter.CoffeeItemAdapter
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -36,11 +41,14 @@ class HomeFragment : Fragment() {
     private var basketSize : Int = 0
     private var basket: ArrayList<Product> = arrayListOf()
     private var subtotal: Float = 0.0f
+    private var searchView: SearchView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         binding.recyclerViewName.layoutManager = LinearLayoutManager(context)
@@ -53,6 +61,8 @@ class HomeFragment : Fragment() {
         progressBar = binding.progressBar
         progressBar!!.visibility = View.VISIBLE
 
+        searchView = binding.searchView
+
         fetchProducts()
 
         return binding.root
@@ -61,6 +71,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getBasket()
+        setUpSearchView()
     }
 
     override fun onDestroyView() {
@@ -149,6 +160,34 @@ class HomeFragment : Fragment() {
         binding.layoutBasket.buttonBasket.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToBasketFragment())
         }
+    }
+
+    private fun setUpSearchView() {
+
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                var isProductExisting = false
+                for (item in coffeeItems) {
+                    var coffeeProducts = item.products
+                    for (cProducts in coffeeProducts) {
+                        if (cProducts.name == query) {
+                            isProductExisting = true
+                        }
+                    }
+                }
+                if (isProductExisting) {
+                    Toast.makeText(requireContext(), "Product found", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(requireContext(), "Product NOT found", Toast.LENGTH_LONG).show()
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                return false
+            }
+        })
     }
 
     companion object {
