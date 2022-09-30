@@ -2,10 +2,13 @@ package csv.masters.myapplication.presentation.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
-import androidx.navigation.ui.*
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import csv.masters.myapplication.R
 import csv.masters.myapplication.databinding.ActivityHomeBinding
@@ -14,8 +17,6 @@ import csv.masters.myapplication.presentation.landing.LandingActivity
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,16 +31,11 @@ class HomeActivity : AppCompatActivity() {
         val drawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navigationView
         val navController = findNavController(R.id.navFragment)
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.homeFragment, R.id.basketFragment
-            ), drawerLayout
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        setupActionBarWithNavController(navController, drawerLayout)
 
         navView.setNavigationItemSelectedListener { item ->
-            when(item.title) {
+            when (item.title) {
                 getString(R.string.sign_out) -> {
                     openLandingPage()
                 }
@@ -61,7 +57,15 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.navFragment)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        return NavigationUI.navigateUp(navController, binding.drawerLayout)
+    }
+
+    override fun onBackPressed() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private fun openLandingPage() {
@@ -74,4 +78,5 @@ class HomeActivity : AppCompatActivity() {
             }
         )
     }
+
 }

@@ -16,6 +16,7 @@ import csv.masters.myapplication.data.local.DataStoreManager
 import csv.masters.myapplication.data.remote.dto.product.Product
 import csv.masters.myapplication.databinding.FragmentProductDetailBinding
 import kotlinx.coroutines.launch
+import androidx.appcompat.widget.SearchView
 
 class ProductDetailFragment : Fragment() {
 

@@ -41,7 +41,6 @@
     <string name="basket">Basket</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="search">Search</string>
     <string name="product_price">Php %1$s.00</string>
     <string name="product_detail">Product Detail</string>
     <string name="edit">Edit</string>
@@ -60,4 +59,8 @@
     <string name="email_error">Incorrect email format</string>
     <string name="invalid_mobile_number">Invalid mobile number</string>
     <string name="sign_out">Sign Out</string>
+
+    <string name="search">SearchView</string>
+    <string name="no_match">No match found</string>
+    <string name="enter_some_text" />
 </resources>
