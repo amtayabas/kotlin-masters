@@ -61,4 +61,5 @@
 
     <string name="search">SearchView</string>
     <string name="no_match">No match found</string>
+    <string name="enter_some_text" />
 </resources>

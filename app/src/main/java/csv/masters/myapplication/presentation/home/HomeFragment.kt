@@ -5,15 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import csv.masters.myapplication.R
 import csv.masters.myapplication.data.local.BasketManager
 import csv.masters.myapplication.data.local.DataStoreManager
@@ -25,7 +22,6 @@ import csv.masters.myapplication.data.repository.ProductsRepositoryImpl
 import csv.masters.myapplication.databinding.FragmentHomeBinding
 import csv.masters.myapplication.databinding.LayoutHomeWithBasketBinding
 import csv.masters.myapplication.presentation.home.adapter.CoffeeGroupAdapter
-import csv.masters.myapplication.presentation.home.adapter.CoffeeItemAdapter
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -70,6 +66,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         getBasket()
         setUpSearchView()
     }
@@ -93,7 +90,7 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful) {
                     progressBar!!.visibility = View.GONE
                     coffeeItems = response.body()!!
-                    setupAdapterList()
+                    setupAdapterList(coffeeItems) //added parameter coffeeItems [Sham]
                 } else {
                     Log.e(LOG_TAG, "Error encountered while fetching products: ${response.message()}")
                 }
@@ -126,7 +123,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupAdapterList() {
+    private fun setupAdapterList(valueList : ArrayList<CoffeeResponseItem>) { //added parameter valueList [Sham]
         val adapter = CoffeeGroupAdapter()
         binding.recyclerViewName.adapter = adapter
 
@@ -149,7 +146,7 @@ class HomeFragment : Fragment() {
             setUpBasketView(basketSize, basketSize, subtotal)
         }
 
-        adapter.differ.submitList(coffeeItems)
+        adapter.differ.submitList(valueList) //changed from coffeeList to the function's parameter which is the valueList [Sham]
     }
 
     private fun setUpBasketView(quantity: Int, itemInBasket: Int, total: Float) {
@@ -162,29 +159,34 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setUpSearchView() {
-
+    private fun setUpSearchView() { //newly added function for searchView [Sham]
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
+            override fun onQueryTextSubmit(searchKey: String?): Boolean {
+
                 var isProductExisting = false
+                var searchResult: ArrayList<Product> = arrayListOf()
+
+                //looping through coffee items to check if searchKey is existing
                 for (item in coffeeItems) {
-                    var coffeeProducts = item.products
-                    for (cProducts in coffeeProducts) {
-                        if (cProducts.name == query) {
+                    for (product in item.products) {
+                        if (product.name.contains(searchKey.toString(), ignoreCase = true)) {
                             isProductExisting = true
+                            searchResult.add(product)
                         }
                     }
                 }
+
                 if (isProductExisting) {
-                    Toast.makeText(requireContext(), "Product found", Toast.LENGTH_LONG).show()
+                    var coffeeItemsSearched: ArrayList<CoffeeResponseItem> = arrayListOf()
+                    coffeeItemsSearched.add(CoffeeResponseItem("Search Result", searchResult))
+                    setupAdapterList(coffeeItemsSearched)
                 } else {
                     Toast.makeText(requireContext(), "Product NOT found", Toast.LENGTH_LONG).show()
                 }
+
                 return false
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
-
                 return false
             }
         })

@@ -12,9 +12,6 @@
                             android:color="#D6DDE5"/>
                     </shape>
                 </item>
-
-                <item android:drawable="@drawable/ic_search"
-                    android:gravity="center|end"/>
             </layer-list>
         </item>
 
