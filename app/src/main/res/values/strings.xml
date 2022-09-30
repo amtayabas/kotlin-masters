@@ -59,4 +59,5 @@
     <string name="signup_name_hint">What should people call you?</string>
     <string name="email_error">Incorrect email format</string>
     <string name="invalid_mobile_number">Invalid mobile number</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

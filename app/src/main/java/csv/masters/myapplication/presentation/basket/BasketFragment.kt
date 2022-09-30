@@ -99,33 +99,44 @@ class BasketFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             basket = basketManager!!.Operations().getBasket()
 
-            if (basket.isNotEmpty()) {
-                binding.tvOrderSummary.visibility = View.VISIBLE
-                binding.cartItemsRecyclerView.visibility = View.VISIBLE
-            } else {
-                binding.tvOrderSummary.visibility = View.GONE
-                binding.cartItemsRecyclerView.visibility = View.GONE
-            }
-
-            basketItemAdapter?.differ?.submitList(basket)
-
-            if (basket.isNotEmpty()) {
-                var subtotal = 0.0
-                for (prod in basket) {
-                    subtotal += prod.totalProductPrice
+            with(binding) {
+                if (basket.isNotEmpty()) {
+                    tvOrderSummary.visibility = View.VISIBLE
+                    cartItemsRecyclerView.visibility = View.VISIBLE
+                    ivDelete.visibility = View.VISIBLE
+                    buttonPlaceOrder.isEnabled = false
+                } else {
+                    tvOrderSummary.visibility = View.GONE
+                    cartItemsRecyclerView.visibility = View.GONE
+                    ivDelete.visibility = View.GONE
+                    buttonPlaceOrder.isEnabled = true
                 }
-                binding.tvTotalAmount.text = String.format("Php %.2f", subtotal)
-            } else {
-                binding.tvTotalAmount.text = "Php 0.00"
+
+                basketItemAdapter?.differ?.submitList(basket)
+
+                if (basket.isNotEmpty()) {
+                    var subtotal = 0.0
+                    for (prod in basket) {
+                        subtotal += prod.totalProductPrice
+                    }
+                    tvTotalAmount.text = String.format("Php %.2f", subtotal)
+                } else {
+                    tvTotalAmount.text = "Php 0.00"
+                }
             }
         }
     }
 
     private fun clearBasket() {
         basketItemAdapter!!.differ.submitList(arrayListOf())
-        binding.tvOrderSummary.visibility = View.GONE
-        binding.cartItemsRecyclerView.visibility = View.GONE
-        binding.tvTotalAmount.text = "Php 0.00"
+
+        with(binding) {
+            tvOrderSummary.visibility = View.GONE
+            cartItemsRecyclerView.visibility = View.GONE
+            ivDelete.visibility = View.GONE
+            tvTotalAmount.text = "Php 0.00"
+            buttonPlaceOrder.isEnabled = false
+        }
     }
 
     companion object {

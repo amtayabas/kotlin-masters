@@ -1,15 +1,15 @@
 package csv.masters.myapplication.presentation.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.google.android.material.navigation.NavigationView
 import csv.masters.myapplication.R
 import csv.masters.myapplication.databinding.ActivityHomeBinding
+import csv.masters.myapplication.presentation.landing.LandingActivity
 
 class HomeActivity : AppCompatActivity() {
 
@@ -38,6 +38,19 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        navView.setNavigationItemSelectedListener { item ->
+            when(item.title) {
+                getString(R.string.sign_out) -> {
+                    openLandingPage()
+                }
+                else -> {
+                    NavigationUI.onNavDestinationSelected(item, navController)
+                }
+            }
+            drawerLayout.closeDrawers()
+            return@setNavigationItemSelectedListener true
+        }
+
     }
 
     // NOTE: Can be used for settings (Kebab Menu)
@@ -49,5 +62,16 @@ class HomeActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.navFragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    private fun openLandingPage() {
+        startActivity(
+            Intent(
+                this@HomeActivity,
+                LandingActivity::class.java
+            ).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+        )
     }
 }

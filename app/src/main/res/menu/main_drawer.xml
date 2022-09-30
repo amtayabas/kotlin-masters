@@ -9,4 +9,8 @@
         android:id="@id/basketFragment"
         android:title="@string/basket"/>
 
+    <item
+        android:id="@+id/signOut"
+        android:title="@string/sign_out"/>
+
 </menu>
