@@ -82,6 +82,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun isPhoneNumberValid(): Boolean {
-        return Patterns.PHONE.matcher(binding.phoneNumber.text.toString()).matches()
+        return Patterns.PHONE.matcher(binding.phoneNumber.text.toString()).matches() &&
+                binding.phoneNumber.text?.length!! >= 10
     }
 }

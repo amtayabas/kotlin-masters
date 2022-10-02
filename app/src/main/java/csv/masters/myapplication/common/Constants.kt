@@ -1,9 +1,13 @@
 package csv.masters.myapplication.common
 
-class Constants {
+abstract class Constants {
 
-    companion object Basket {
+    object Basket {
         const val BASKET_OBJECT = "basket_object"
+    }
+
+    object User {
+        const val SIGNED_IN = "signed_in"
     }
 
 }

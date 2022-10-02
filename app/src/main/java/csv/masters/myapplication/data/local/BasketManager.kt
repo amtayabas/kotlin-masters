@@ -7,11 +7,11 @@ class BasketManager constructor(private val dataStoreManager: DataStoreManager) 
 
     inner class Operations {
         suspend fun getBasket(): ArrayList<Product> {
-            return dataStoreManager.getObjectList(Constants.BASKET_OBJECT, Product::class.java) ?: arrayListOf()
+            return dataStoreManager.getObjectList(Constants.Basket.BASKET_OBJECT, Product::class.java) ?: arrayListOf()
         }
 
         suspend fun emptyBasket() {
-            dataStoreManager.deleteData(Constants.BASKET_OBJECT)
+            dataStoreManager.deleteData(Constants.Basket.BASKET_OBJECT)
         }
 
         suspend fun addToBasket(product: Product): ArrayList<Product> {
@@ -25,7 +25,7 @@ class BasketManager constructor(private val dataStoreManager: DataStoreManager) 
             }
             basket.remove(productInBasket)
             basket.add(product)
-            dataStoreManager.putObject(Constants.BASKET_OBJECT, basket, ArrayList::class.java)
+            dataStoreManager.putObject(Constants.Basket.BASKET_OBJECT, basket, ArrayList::class.java)
             return basket
         }
 
@@ -39,7 +39,7 @@ class BasketManager constructor(private val dataStoreManager: DataStoreManager) 
                 if (product.itemInBasket > 0) {
                     basket.add(product)
                 }
-                dataStoreManager.putObject(Constants.BASKET_OBJECT, basket, ArrayList::class.java)
+                dataStoreManager.putObject(Constants.Basket.BASKET_OBJECT, basket, ArrayList::class.java)
             }
             return basket
         }
@@ -54,7 +54,7 @@ class BasketManager constructor(private val dataStoreManager: DataStoreManager) 
                 }
             }
 
-            dataStoreManager.putObject(Constants.BASKET_OBJECT, basket, ArrayList::class.java)
+            dataStoreManager.putObject(Constants.Basket.BASKET_OBJECT, basket, ArrayList::class.java)
             return basket
         }
 
