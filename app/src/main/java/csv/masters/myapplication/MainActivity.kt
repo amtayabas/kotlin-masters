@@ -46,11 +46,6 @@ class MainActivity : AppCompatActivity() {
         setupView()
         setupRecyclerView()
         setupBasket()
-
-        MainScope().launch {
-            delay(5000)
-            setupProgressBarView()
-        }
     }
 
     private fun setupView() {
@@ -90,14 +85,15 @@ class MainActivity : AppCompatActivity() {
             if (orders.isNotEmpty()) {
                 binding.tvOrderSummary.visibility = View.VISIBLE
                 binding.orderItemsRecyclerView.visibility = View.VISIBLE
+
+                orderItemAdapter?.differ?.submitList(orders)
+                orderItemAdapter?.setIsOrderOnTheWay(true)
+
+                delay(5000)
+                setupProgressBarView()
             } else {
-                binding.tvOrderSummary.visibility = View.GONE
-                binding.orderItemsRecyclerView.visibility = View.GONE
+                setUpNoUpcomingOrderView()
             }
-
-            orderItemAdapter?.differ?.submitList(orders)
-            orderItemAdapter?.setIsOrderOnTheWay(true)
-
         }
     }
 
@@ -129,6 +125,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             isOrderOnTheWay = false
+        }
+    }
+
+    private fun setUpNoUpcomingOrderView() {
+        with(binding) {
+            imgCartEmpty.visibility = View.VISIBLE
+            tvCartEmpty.visibility = View.VISIBLE
+            imgBanner.visibility = View.GONE
+            layoutOrder.visibility = View.GONE
+            layoutContactDriver.visibility = View.GONE
+            tvOrderSummary.visibility = View.GONE
+            orderItemsRecyclerView.visibility = View.GONE
+            btnCancelOrder.visibility = View.GONE
         }
     }
 

@@ -13,7 +13,6 @@
         android:scaleType="fitXY"
         tools:src="@drawable/loading_potato"
         android:elevation="10dp"
-        tools:visibility="visible"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +95,32 @@
                 android:src="@drawable/img_preparing"
                 app:layout_constraintTop_toBottomOf="@id/toolbar"
                 app:layout_constraintEnd_toEndOf="@id/glEnd"
-                app:layout_constraintStart_toStartOf="@id/glStart" />
+                app:layout_constraintStart_toStartOf="@id/glStart"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgCartEmpty"
+                android:layout_width="300dp"
+                android:layout_height="250dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/empty_cart"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/glEnd"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCartEmpty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/no_upcoming_order"
+                android:textColor="@color/black"
+                android:textSize="@dimen/large_font"
+                android:visibility="gone"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintEnd_toEndOf="@id/glEnd"
+                app:layout_constraintTop_toBottomOf="@id/imgCartEmpty" />
 
             <LinearLayout
                 android:id="@+id/layout_order"
@@ -107,6 +131,7 @@
                 app:layout_constraintEnd_toEndOf="@id/glEnd"
                 app:layout_constraintTop_toBottomOf="@id/imgBanner"
                 android:background="@drawable/round_button_bg_stroke"
+                android:visibility="visible"
                 android:padding="@dimen/large_padding"
                 android:layout_margin="@dimen/small_margin">
 
@@ -137,6 +162,7 @@
                 app:layout_constraintEnd_toEndOf="@id/glEnd"
                 app:layout_constraintTop_toBottomOf="@id/layout_order"
                 android:background="@drawable/round_button_bg_stroke"
+                android:visibility="visible"
                 android:paddingTop="@dimen/large_padding"
                 android:paddingStart="@dimen/large_padding"
                 android:paddingEnd="@dimen/large_padding"
@@ -240,6 +266,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/medium_font"
                 android:layout_margin="@dimen/small_margin"
+                android:visibility="visible"
                 app:layout_constraintStart_toEndOf="@+id/glStart"
                 app:layout_constraintTop_toBottomOf="@+id/layout_contact_driver" />
 
@@ -250,7 +277,8 @@
                 android:nestedScrollingEnabled="true"
                 app:layout_constraintEnd_toEndOf="@id/glEnd"
                 app:layout_constraintStart_toStartOf="@id/glStart"
-                app:layout_constraintTop_toBottomOf="@+id/tvOrderSummary" />
+                app:layout_constraintTop_toBottomOf="@+id/tvOrderSummary"
+                android:visibility="visible"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
