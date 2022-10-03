@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import csv.masters.myapplication.R
@@ -92,6 +94,10 @@ class BasketFragment : Fragment() {
         binding.cartItemsRecyclerView.apply {
             adapter = basketItemAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        }
+
+        basketItemAdapter!!.setOnItemEditClickListener {
+            findNavController().navigate(BasketFragmentDirections.actionBasketFragmentToProductDetailFragment(it))
         }
     }
 

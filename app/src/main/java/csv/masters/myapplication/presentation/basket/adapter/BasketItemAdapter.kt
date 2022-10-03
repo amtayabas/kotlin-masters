@@ -40,8 +40,14 @@ class BasketItemAdapter : RecyclerView.Adapter<BasketItemAdapter.ViewHolder>() {
 
             with(holder.binding) {
                 tvProductName.text = product.name
-                tvSizes.text = context.getString(R.string.sizes)
-                tvAddOns.text = context.getString(R.string.add_ons)
+                tvSizes.text = product.size
+                var addOn = ""
+                product.addOn?.let {
+                    it.forEach { item ->
+                        addOn += "$item "
+                    }
+                }
+                tvAddOns.text = addOn
                 tvPrice.text = String.format("Php %.2f", product.totalProductPrice)
                 tvQuantity.text = product.quantity.toString()
 
@@ -50,8 +56,7 @@ class BasketItemAdapter : RecyclerView.Adapter<BasketItemAdapter.ViewHolder>() {
             }
 
             holder.binding.tvEdit.setOnClickListener {
-                findNavController().navigate(BasketFragmentDirections.actionBasketFragmentToProductDetailFragment(product))
-                onItemClickListener?.let { it(product) }
+                onItemEditClickListener?.let { it(product) }
             }
         }
     }
@@ -60,9 +65,9 @@ class BasketItemAdapter : RecyclerView.Adapter<BasketItemAdapter.ViewHolder>() {
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((Product) -> Unit)? = null
+    private var onItemEditClickListener: ((Product) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Product) -> Unit) {
-        onItemClickListener = listener
+    fun setOnItemEditClickListener(listener: (Product) -> Unit) {
+        onItemEditClickListener = listener
     }
 }

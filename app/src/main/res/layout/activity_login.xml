@@ -96,6 +96,7 @@
         android:lines="1"
         android:singleLine="true"
         android:drawablePadding="8dp"
+        android:imeOptions="actionDone"
         android:textSize="@dimen/medium_font"/>
 
     </LinearLayout>

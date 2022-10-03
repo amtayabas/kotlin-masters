@@ -4,6 +4,7 @@ abstract class Constants {
 
     object Basket {
         const val BASKET_OBJECT = "basket_object"
+        const val MENU = "menu"
     }
 
     object User {

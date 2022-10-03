@@ -15,9 +15,11 @@ data class Product(
     @SerializedName("price")
     val price: Float,
     @SerializedName("sizes")
-    val sizes: String,
+    val sizes: String?,
 
+    var size: String? = "Regular (12oz)",
+    var addOn: ArrayList<String>? = arrayListOf(),
     var itemInBasket: Int = 0,
     var totalProductPrice: Float,
-    var quantity: Int = 1
+    var quantity: Int = 1,
 ): Parcelable

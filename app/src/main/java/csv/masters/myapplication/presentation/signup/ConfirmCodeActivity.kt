@@ -7,16 +7,21 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import csv.masters.myapplication.MainActivity
+import androidx.lifecycle.lifecycleScope
 import csv.masters.myapplication.R
+import csv.masters.myapplication.common.Constants
+import csv.masters.myapplication.data.local.DataStoreManager
 import csv.masters.myapplication.databinding.ActivityConfirmCodeBinding
 import csv.masters.myapplication.databinding.LayoutSignupHeaderBinding
 import csv.masters.myapplication.presentation.home.HomeActivity
+import kotlinx.coroutines.launch
 
 class ConfirmCodeActivity : AppCompatActivity() {
 
     private lateinit var headerBinding: LayoutSignupHeaderBinding
     private lateinit var binding: ActivityConfirmCodeBinding
+
+    private var dataStoreManager: DataStoreManager? = null
 
     private var phoneNumber: String? = null
 
@@ -30,6 +35,7 @@ class ConfirmCodeActivity : AppCompatActivity() {
         phoneNumber = intent.getStringExtra(PHONE_NUMBER)
 
         setupView()
+        dataStoreManager = DataStoreManager(applicationContext)
     }
 
     private fun setupView() {
@@ -71,8 +77,11 @@ class ConfirmCodeActivity : AppCompatActivity() {
                             tvErrorMessage.visibility = View.VISIBLE
                         } else {
                             tvErrorMessage.visibility = View.GONE
-                            remainingRetry = MAX_RETRY
-                            startActivity(Intent(this@ConfirmCodeActivity, HomeActivity::class.java))
+                            lifecycleScope.launch {
+                                remainingRetry = MAX_RETRY
+                                dataStoreManager!!.putBoolean(Constants.User.SIGNED_IN, true)
+                                startActivity(Intent(this@ConfirmCodeActivity, HomeActivity::class.java))
+                            }
                         }
                     } else {
                         tvErrorMessage.visibility = View.GONE

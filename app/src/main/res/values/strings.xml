@@ -63,4 +63,10 @@
     <string name="search">SearchView</string>
     <string name="no_match">No match found</string>
     <string name="enter_some_text" />
+    <string name="size_regular">Regular (12oz)</string>
+    <string name="size_tall">Tall (16oz)</string>
+    <string name="size_large">Large(24oz)</string>
+    <string name="caramel_drizzle">Caramel drizzle</string>
+    <string name="hazelnut_syrup">Hazelnut syrup</string>
+    <string name="toffee_nut_syrup">Toffee nut syrup</string>
 </resources>

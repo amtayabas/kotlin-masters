@@ -45,6 +45,7 @@ class HomeActivity : AppCompatActivity() {
                 getString(R.string.sign_out) -> {
                     lifecycleScope.launch {
                         dataStoreManager!!.putBoolean(Constants.User.SIGNED_IN, false)
+                        dataStoreManager!!.deleteData(Constants.Basket.BASKET_OBJECT)
                         openLandingPage()
                     }
                 }

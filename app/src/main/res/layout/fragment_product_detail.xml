@@ -136,7 +136,7 @@
 
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/rgSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -154,21 +154,22 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
-            android:text="Regular (12oz)"
+            android:text="@string/size_regular"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:paddingLeft="10dp"
+            android:checked="true"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 
         <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/rbLarge"
+            android:id="@+id/rbTall"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
-            android:text="Tall (16oz)"
+            android:text="@string/size_tall"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:paddingLeft="10dp"
@@ -177,12 +178,12 @@
             app:layout_constraintTop_toBottomOf="@+id/rbRegular" />
 
         <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/rbTall"
+            android:id="@+id/rbLarge"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Large(24oz)"
+            android:text="@string/size_large"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:paddingLeft="10dp"
@@ -266,34 +267,34 @@
         app:layout_constraintBottom_toTopOf="@id/glMidBottom">
 
         <CheckBox
-            android:id="@+id/checkBox1"
+            android:id="@+id/cbCaramel"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:paddingLeft="10dp"
-            android:text="Caramel drizzle" />
+            android:text="@string/caramel_drizzle" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/cbHazelnut"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:paddingLeft="10dp"
-            android:text="Hazelnut syrup"
+            android:text="@string/hazelnut_syrup"
             app:layout_constraintTop_toBottomOf="@+id/checkBox1" />
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/cbToffee"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:paddingLeft="10dp"
-            android:text="Toffee nut syrup"
+            android:text="@string/toffee_nut_syrup"
             app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
     </LinearLayout>
