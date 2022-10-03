@@ -2,6 +2,7 @@ package csv.masters.myapplication.presentation.basket
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +16,11 @@ import com.bumptech.glide.Glide
 import csv.masters.myapplication.R
 import csv.masters.myapplication.data.local.BasketManager
 import csv.masters.myapplication.data.local.DataStoreManager
+import csv.masters.myapplication.data.local.OrderManager
 import csv.masters.myapplication.data.remote.dto.product.Product
 import csv.masters.myapplication.databinding.FragmentBasketBinding
 import csv.masters.myapplication.presentation.basket.adapter.BasketItemAdapter
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class BasketFragment : Fragment() {
@@ -26,6 +29,7 @@ class BasketFragment : Fragment() {
 
     private var dataStoreManager: DataStoreManager? = null
     private var basketManager: BasketManager? = null
+    private var orderManager: OrderManager? = null
     private var basketItemAdapter: BasketItemAdapter? = null
 
     private var basket: ArrayList<Product> = arrayListOf()
@@ -67,6 +71,10 @@ class BasketFragment : Fragment() {
             basketManager = null
         }
 
+        if (orderManager != null) {
+            orderManager = null
+        }
+
         if (basketItemAdapter != null) {
             basketItemAdapter = null
         }
@@ -79,7 +87,7 @@ class BasketFragment : Fragment() {
                 .into(ivDelete)
 
             ivDelete.setOnClickListener {
-                val dialog = AlertDialog.Builder(requireContext())
+                AlertDialog.Builder(requireContext())
                     .setTitle("Oh No!")
                     .setMessage("Do you want to clear your basket?")
                     .setPositiveButton("Yes") { _, _ ->
@@ -95,7 +103,15 @@ class BasketFragment : Fragment() {
             }
 
             buttonPlaceOrder.setOnClickListener {
-                //
+                viewLifecycleOwner.lifecycleScope.launch {
+                    binding.progressBar.visibility = View.VISIBLE
+                    orderManager = OrderManager(dataStoreManager!!)
+                    orderManager!!.Operations().addUpcomingOrders(basketManager!!)
+                    delay(2000)
+                    binding.progressBar.visibility = View.GONE
+                    Log.d(LOG_TAG, "Upcoming Order: ${orderManager!!.Operations().getUpcomingOrders()}")
+                }
+
             }
         }
     }

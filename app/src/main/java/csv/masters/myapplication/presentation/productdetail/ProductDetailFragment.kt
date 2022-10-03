@@ -237,7 +237,7 @@ class ProductDetailFragment : Fragment() {
     }
 
     private fun updateTotalPrice(prod: Product, isUpdate: Boolean? = false) {
-        totalPrice = computeTotalPrice(quantityCounter, prod.price, addOn = prod.addOn ?: arrayListOf())
+        totalPrice = computeTotalPrice(quantityCounter, prod.price, size = prod.size, addOn = prod.addOn ?: arrayListOf())
         if (isUpdate == true) {
             binding.buttonAdd.text = getString(R.string.update_basket, String.format("%.2f", totalPrice))
         } else {
