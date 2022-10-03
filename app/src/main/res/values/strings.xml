@@ -69,4 +69,5 @@
     <string name="caramel_drizzle">Caramel drizzle</string>
     <string name="hazelnut_syrup">Hazelnut syrup</string>
     <string name="toffee_nut_syrup">Toffee nut syrup</string>
+    <string name="order_on_the_way">Your order is on the way to you!</string>
 </resources>
