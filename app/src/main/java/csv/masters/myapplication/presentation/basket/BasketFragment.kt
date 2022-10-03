@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,8 @@ class BasketFragment : Fragment() {
 
     private var basket: ArrayList<Product> = arrayListOf()
 
+    private var isButtonEnabled = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,6 +50,11 @@ class BasketFragment : Fragment() {
         setupBasket()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setupBasket()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         if (dataStoreManager != null) {
@@ -61,7 +69,6 @@ class BasketFragment : Fragment() {
             basketItemAdapter = null
         }
     }
-
 
     private fun setupView() {
         with(binding) {
@@ -84,6 +91,10 @@ class BasketFragment : Fragment() {
                     }
                     .create().show()
             }
+
+            buttonPlaceOrder.setOnClickListener {
+                //
+            }
         }
     }
 
@@ -104,13 +115,21 @@ class BasketFragment : Fragment() {
                     tvOrderSummary.visibility = View.VISIBLE
                     cartItemsRecyclerView.visibility = View.VISIBLE
                     ivDelete.visibility = View.VISIBLE
-                    buttonPlaceOrder.isEnabled = false
+                    isButtonEnabled = true
                 } else {
                     tvOrderSummary.visibility = View.GONE
                     cartItemsRecyclerView.visibility = View.GONE
                     ivDelete.visibility = View.GONE
-                    buttonPlaceOrder.isEnabled = true
+                    isButtonEnabled = false
                 }
+
+                buttonPlaceOrder.isEnabled = isButtonEnabled
+                buttonPlaceOrder.background = if (isButtonEnabled) ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.round_button)
+                else ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.round_button_disabled)
 
                 basketItemAdapter?.differ?.submitList(basket)
 
@@ -136,6 +155,9 @@ class BasketFragment : Fragment() {
             ivDelete.visibility = View.GONE
             tvTotalAmount.text = "Php 0.00"
             buttonPlaceOrder.isEnabled = false
+            buttonPlaceOrder.background = ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.round_button_disabled)
         }
     }
 

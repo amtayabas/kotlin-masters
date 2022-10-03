@@ -63,4 +63,5 @@
     <string name="search">SearchView</string>
     <string name="no_match">No match found</string>
     <string name="enter_some_text" />
+    <string name="order_on_the_way">Your order is on the way to you!</string>
 </resources>
