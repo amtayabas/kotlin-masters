@@ -2,15 +2,14 @@ package csv.masters.myapplication.presentation.basket.adapter
 
 import android.graphics.Paint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import csv.masters.myapplication.R
 import csv.masters.myapplication.data.remote.dto.product.Product
 import csv.masters.myapplication.databinding.ItemBasketProductBinding
-import csv.masters.myapplication.presentation.basket.BasketFragmentDirections
 
 class BasketItemAdapter : RecyclerView.Adapter<BasketItemAdapter.ViewHolder>() {
 
@@ -28,10 +27,15 @@ class BasketItemAdapter : RecyclerView.Adapter<BasketItemAdapter.ViewHolder>() {
     }
 
     val differ = AsyncListDiffer(this, differCallback)
+    var isOrderOnTheWay: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemBasketProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
+    }
+
+    fun setIsOrderOnTheWay(orderOnTheWay: Boolean) {
+        isOrderOnTheWay = orderOnTheWay
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -47,12 +51,18 @@ class BasketItemAdapter : RecyclerView.Adapter<BasketItemAdapter.ViewHolder>() {
                         addOn += "$item "
                     }
                 }
-                tvAddOns.text = addOn
+                if (addOn.isNotEmpty()) {
+                    tvAddOns.visibility = View.VISIBLE
+                    tvAddOns.text = addOn
+                }
                 tvPrice.text = String.format("Php %.2f", product.totalProductPrice)
                 tvQuantity.text = product.quantity.toString()
 
-                tvEdit.text = context.getString(R.string.edit)
-                tvEdit.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+                if (!isOrderOnTheWay) {
+                    tvEdit.visibility = View.VISIBLE
+                    tvEdit.text = context.getString(R.string.edit)
+                    tvEdit.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+                }
             }
 
             holder.binding.tvEdit.setOnClickListener {

@@ -96,6 +96,7 @@ class ProductDetailFragment : Fragment() {
                 buttonAdd.setOnClickListener {
                     selectedProduct!!.quantity = quantityCounter
                     selectedProduct!!.totalProductPrice = totalPrice
+                    if (selectedProduct!!.size.isNullOrEmpty()) selectedProduct!!.size = "Regular (12oz)"
                     Log.d(LOG_TAG, "Add to basket: ${selectedProduct!!.name}")
                     viewLifecycleOwner.lifecycleScope.launch {
                         basketManager!!.Operations().addToBasket(selectedProduct!!)

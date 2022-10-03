@@ -1,18 +1,18 @@
 package csv.masters.myapplication.presentation.basket
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import csv.masters.myapplication.MainActivity
 import csv.masters.myapplication.R
 import csv.masters.myapplication.data.local.BasketManager
 import csv.masters.myapplication.data.local.DataStoreManager
@@ -54,11 +54,15 @@ class BasketFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupBasket()
+        binding.loadingIcon.visibility = View.GONE
+        binding.loadingView.visibility = View.GONE
     }
 
     override fun onResume() {
         super.onResume()
         setupBasket()
+        binding.loadingIcon.visibility = View.GONE
+        binding.loadingView.visibility = View.GONE
     }
 
     override fun onDestroyView() {
@@ -104,14 +108,16 @@ class BasketFragment : Fragment() {
 
             buttonPlaceOrder.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.loadingIcon.visibility = View.VISIBLE
+                    binding.loadingView.visibility = View.VISIBLE
+                    Glide.with(this@BasketFragment)
+                        .load(R.drawable.loading_potato)
+                        .into(binding.loadingIcon)
                     orderManager = OrderManager(dataStoreManager!!)
                     orderManager!!.Operations().addUpcomingOrders(basketManager!!)
-                    delay(2000)
-                    binding.progressBar.visibility = View.GONE
-                    Log.d(LOG_TAG, "Upcoming Order: ${orderManager!!.Operations().getUpcomingOrders()}")
+                    delay(3000)
+                    startActivity(Intent(context, MainActivity::class.java))
                 }
-
             }
         }
     }

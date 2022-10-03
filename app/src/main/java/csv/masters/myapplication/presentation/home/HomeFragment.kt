@@ -16,11 +16,8 @@ import csv.masters.myapplication.R
 import csv.masters.myapplication.common.Constants
 import csv.masters.myapplication.data.local.BasketManager
 import csv.masters.myapplication.data.local.DataStoreManager
-import csv.masters.myapplication.data.remote.api.ProductsApi
-import csv.masters.myapplication.data.remote.api.RetrofitClient
 import csv.masters.myapplication.data.remote.dto.product.CoffeeResponseItem
 import csv.masters.myapplication.data.remote.dto.product.Product
-import csv.masters.myapplication.data.repository.ProductsRepositoryImpl
 import csv.masters.myapplication.databinding.FragmentHomeBinding
 import csv.masters.myapplication.databinding.LayoutHomeWithBasketBinding
 import csv.masters.myapplication.presentation.home.adapter.CoffeeGroupAdapter
@@ -124,6 +121,7 @@ class HomeFragment : Fragment() {
             val totalProductPrice = it.price * quantityCounter
             it.quantity = quantityCounter
             it.totalProductPrice = totalProductPrice
+            if (it.size.isNullOrEmpty()) it.size = "Regular (12oz)"
             Log.d(LOG_TAG, "Add to basket: ${it.name}")
             viewLifecycleOwner.lifecycleScope.launch {
                 basketManager!!.Operations().addToBasket(it)

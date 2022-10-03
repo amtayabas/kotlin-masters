@@ -3,23 +3,20 @@ package csv.masters.myapplication
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import csv.masters.myapplication.data.local.BasketManager
 import csv.masters.myapplication.data.local.DataStoreManager
+import csv.masters.myapplication.data.local.OrderManager
 import csv.masters.myapplication.data.remote.dto.product.Product
 import csv.masters.myapplication.databinding.ActivityMainBinding
 import csv.masters.myapplication.presentation.basket.adapter.BasketItemAdapter
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
@@ -27,11 +24,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var enabled = false
     private var dataStoreManager: DataStoreManager? = null
-    private var basketManager: BasketManager? = null
-    private var basketItemAdapter: BasketItemAdapter? = null
-    private var basket: ArrayList<Product> = arrayListOf()
-
-    private var loadingProgressBar: ProgressBar? = null
+    private var orderManager: OrderManager? = null
+    private var orderItemAdapter: BasketItemAdapter? = null
+    private var orders: ArrayList<Product> = arrayListOf()
 
     private var isOrderOnTheWay: Boolean = false
 
@@ -41,25 +36,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         dataStoreManager = DataStoreManager(this)
-        basketManager = BasketManager(dataStoreManager!!)
+        orderManager = OrderManager(dataStoreManager!!)
 
         val toolbar: Toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         title = getString(R.string.my_order)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        loadingProgressBar = binding.progressBar
-
         setupView()
         setupRecyclerView()
         setupBasket()
 
-        val timer = Timer()
-        timer.schedule(object : TimerTask() {
-            override fun run() {
-                startTimer()
-            }
-        }, 5000)
+        MainScope().launch {
+            delay(5000)
+            setupProgressBarView()
+        }
     }
 
     private fun setupView() {
@@ -85,18 +76,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        basketItemAdapter = BasketItemAdapter()
+        orderItemAdapter = BasketItemAdapter()
         binding.orderItemsRecyclerView.apply {
-            adapter = basketItemAdapter
+            adapter = orderItemAdapter
             layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
         }
     }
 
     private fun setupBasket() {
         lifecycleScope.launch {
-            basket = basketManager!!.Operations().getBasket()
+            orders = orderManager!!.Operations().getUpcomingOrders()
 
-            if (basket.isNotEmpty()) {
+            if (orders.isNotEmpty()) {
                 binding.tvOrderSummary.visibility = View.VISIBLE
                 binding.orderItemsRecyclerView.visibility = View.VISIBLE
             } else {
@@ -104,36 +95,30 @@ class MainActivity : AppCompatActivity() {
                 binding.orderItemsRecyclerView.visibility = View.GONE
             }
 
-            basketItemAdapter?.differ?.submitList(basket)
+            orderItemAdapter?.differ?.submitList(orders)
+            orderItemAdapter?.setIsOrderOnTheWay(true)
 
         }
     }
 
-    private fun startTimer() {
+    private fun setupProgressBarView() {
         MainScope().launch {
-            withContext(Dispatchers.Main) {
-
-            }
             isOrderOnTheWay = true
 
-            loadingProgressBar!!.visibility = View.VISIBLE
+            binding.loadingIcon.visibility = View.VISIBLE
             binding.loadingView.visibility = View.VISIBLE
+            Glide.with(this@MainActivity)
+                .load(R.drawable.loading_potato)
+                .into(binding.loadingIcon)
 
-            val timer = Timer()
-            timer.schedule(object : TimerTask() {
-                override fun run() {
-                    setUpOrderIsOnTheWayView()
-                }
-            }, 3000)
+            delay(3000)
+            setUpOrderIsOnTheWayView()
         }
     }
 
     private fun setUpOrderIsOnTheWayView() {
         MainScope().launch {
-            withContext(Dispatchers.Main) {
-
-            }
-            loadingProgressBar!!.visibility = View.GONE
+            binding.loadingIcon.visibility = View.GONE
             binding.loadingView.visibility = View.GONE
             if (isOrderOnTheWay) {
                 with(binding) {
@@ -143,24 +128,15 @@ class MainActivity : AppCompatActivity() {
                         .into(imgBanner)
                 }
             }
-
             isOrderOnTheWay = false
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         lifecycleScope.launch {
-            basketManager!!.Operations().emptyBasket()
+            orderManager!!.Operations().emptyUpcomingOrders()
         }
         onBackPressed()
         return true
     }
-
-//    override fun onBackPressed() {
-//        super.onBackPressed()
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(R.id.homeFragment, HomeFragment())
-//            commit()
-//        }
-//    }
 }
