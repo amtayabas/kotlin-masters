@@ -7,10 +7,13 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import csv.masters.myapplication.R
 import csv.masters.myapplication.databinding.ActivitySignUpBinding
 import csv.masters.myapplication.databinding.LayoutSignupHeaderBinding
 import csv.masters.myapplication.presentation.signup.ConfirmCodeActivity.Companion.PHONE_NUMBER
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -49,24 +52,31 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
-            if (isTextFieldNotEmpty()) {
-                if (isPhoneNumberValid()) {
-                    if (isEmailValid()) {
-                        val intent = Intent(this, ConfirmCodeActivity::class.java).apply {
-                            putExtra(
-                                PHONE_NUMBER,
-                                binding.ccp.selectedCountryCode + binding.phoneNumber.text
-                            )
+            lifecycleScope.launch {
+                binding.tvMobileNoError.visibility = View.GONE
+                binding.tvEmailAddError.visibility = View.GONE
+                binding.progressBar.visibility = View.VISIBLE
+                delay(1000)
+                binding.progressBar.visibility = View.GONE
+                if (isTextFieldNotEmpty()) {
+                    if (isPhoneNumberValid()) {
+                        if (isEmailValid()) {
+                            val intent = Intent(this@SignUpActivity, ConfirmCodeActivity::class.java).apply {
+                                putExtra(
+                                    PHONE_NUMBER,
+                                    binding.ccp.selectedCountryCode + binding.phoneNumber.text
+                                )
+                            }
+                            startActivity(intent)
+                        } else {
+                            emailAddError.visibility = View.VISIBLE
                         }
-                        startActivity(intent)
                     } else {
-                        emailAddError.visibility = View.VISIBLE
+                        mobileNoError.visibility = View.VISIBLE
                     }
                 } else {
-                    mobileNoError.visibility = View.VISIBLE
+                    Toast.makeText(this@SignUpActivity, R.string.empty_message, Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(this, R.string.empty_message, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -83,6 +93,6 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun isPhoneNumberValid(): Boolean {
         return Patterns.PHONE.matcher(binding.phoneNumber.text.toString()).matches() &&
-                binding.phoneNumber.text?.length!! >= 10
+                binding.phoneNumber.text?.length!! >= 9
     }
 }
