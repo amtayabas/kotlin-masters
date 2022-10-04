@@ -95,10 +95,10 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgCartEmpty"
-                android:layout_width="300dp"
-                android:layout_height="250dp"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/empty_cart"
+                android:src="@drawable/potato_cry"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/glEnd"
                 app:layout_constraintStart_toStartOf="@id/glStart"
