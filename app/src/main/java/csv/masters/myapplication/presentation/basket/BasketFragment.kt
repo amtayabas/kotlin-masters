@@ -145,10 +145,7 @@ class BasketFragment : Fragment() {
                     ivDelete.visibility = View.VISIBLE
                     isButtonEnabled = true
                 } else {
-                    tvOrderSummary.visibility = View.GONE
-                    cartItemsRecyclerView.visibility = View.GONE
-                    ivDelete.visibility = View.GONE
-                    isButtonEnabled = false
+                    setUpNoUpcomingOrderView()
                 }
 
                 buttonPlaceOrder.isEnabled = isButtonEnabled
@@ -177,15 +174,24 @@ class BasketFragment : Fragment() {
     private fun clearBasket() {
         basketItemAdapter!!.differ.submitList(arrayListOf())
 
+        setUpNoUpcomingOrderView()
+    }
+
+    private fun setUpNoUpcomingOrderView() {
         with(binding) {
+            imgCartEmpty.visibility = View.VISIBLE
+            tvCartEmpty.visibility = View.VISIBLE
             tvOrderSummary.visibility = View.GONE
             cartItemsRecyclerView.visibility = View.GONE
             ivDelete.visibility = View.GONE
-            tvTotalAmount.text = "Php 0.00"
-            buttonPlaceOrder.isEnabled = false
-            buttonPlaceOrder.background = ContextCompat.getDrawable(
-                requireContext(),
-                R.drawable.round_button_disabled)
+            tvDeliverTo.visibility = View.GONE
+            etSelectLocation.visibility = View.GONE
+            tvPaymentDetails.visibility = View.GONE
+            radioGroup.visibility = View.GONE
+            view.visibility = View.GONE
+            tvTotal.visibility = View.GONE
+            tvTotalAmount.visibility = View.GONE
+            buttonPlaceOrder.visibility = View.GONE
         }
     }
 

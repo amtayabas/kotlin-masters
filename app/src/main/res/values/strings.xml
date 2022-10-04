@@ -71,5 +71,5 @@
     <string name="hazelnut_syrup">Hazelnut syrup</string>
     <string name="toffee_nut_syrup">Toffee nut syrup</string>
     <string name="order_on_the_way">Your order is on the way to you!</string>
-    <string name="no_upcoming_order">Looks like you still haven\'t placed any orders yet.</string>
+    <string name="no_upcoming_order">Looks like you still haven\'t placed any items yet.</string>
 </resources>

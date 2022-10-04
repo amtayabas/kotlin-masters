@@ -13,7 +13,7 @@
         android:scaleType="fitXY"
         tools:src="@drawable/loading_potato"
         android:elevation="10dp"
-        tools:visibility="visible"
+        tools:visibility="gone"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         android:background="@color/white"
         android:elevation="5dp"
         android:visibility="gone"
-        tools:visibility="visible"
+        tools:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -92,6 +92,31 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent=".95" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgCartEmpty"
+                android:layout_width="300dp"
+                android:layout_height="250dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/empty_cart"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/glEnd"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCartEmpty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/no_upcoming_order"
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_font"
+                android:visibility="gone"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                app:layout_constraintEnd_toEndOf="@id/glEnd"
+                app:layout_constraintTop_toBottomOf="@id/imgCartEmpty" />
 
             <TextView
                 android:id="@+id/tvDeliverTo"
@@ -164,6 +189,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cartItemsRecyclerView" />
 
             <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/glStart"
