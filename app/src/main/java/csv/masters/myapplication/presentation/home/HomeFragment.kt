@@ -1,6 +1,7 @@
 package csv.masters.myapplication.presentation.home
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var basketBinding: LayoutHomeWithBasketBinding
+    private lateinit var coffeeGroupAdapter: CoffeeGroupAdapter
 
     private var coffeeItems: ArrayList<CoffeeResponseItem> = arrayListOf()
 
@@ -58,6 +60,7 @@ class HomeFragment : Fragment() {
         searchView = binding.searchView
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            setupAdapterList()
             getBasket()
             fetchProducts()
         }
@@ -84,7 +87,7 @@ class HomeFragment : Fragment() {
     private suspend fun fetchProducts() {
         coffeeItems = dataStoreManager!!.getObjectList(Constants.Basket.MENU, CoffeeResponseItem::class.java)?: arrayListOf()
         progressBar!!.visibility = View.GONE
-        setupAdapterList(coffeeItems)
+        coffeeGroupAdapter.differ.submitList(coffeeItems)
     }
 
     private suspend fun getBasket() {
@@ -108,16 +111,16 @@ class HomeFragment : Fragment() {
         Log.d(LOG_TAG, "Basket Size$basketSize")
     }
 
-    private fun setupAdapterList(valueList: ArrayList<CoffeeResponseItem>) { //added parameter valueList [Sham]
-        val adapter = CoffeeGroupAdapter()
-        binding.recyclerViewName.adapter = adapter
+    private fun setupAdapterList() {
+        coffeeGroupAdapter = CoffeeGroupAdapter()
+        binding.recyclerViewName.adapter = coffeeGroupAdapter
 
-        adapter.setOnItemClickListener {
+        coffeeGroupAdapter.setOnItemClickListener {
             Log.d(LOG_TAG, "Selected Product: $it")
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(it))
         }
 
-        adapter.setOnAddToCartClickListener {
+        coffeeGroupAdapter.setOnAddToCartClickListener {
             val totalProductPrice = it.price * quantityCounter
             it.quantity = quantityCounter
             it.totalProductPrice = totalProductPrice
@@ -131,8 +134,6 @@ class HomeFragment : Fragment() {
             subtotal += totalProductPrice
             setUpBasketView(basketSize, basketSize, subtotal)
         }
-
-        adapter.differ.submitList(valueList) //changed from coffeeList to the function's parameter which is the valueList [Sham]
     }
 
     private fun setUpBasketView(quantity: Int, itemInBasket: Int, total: Float) {
@@ -151,7 +152,7 @@ class HomeFragment : Fragment() {
             override fun onQueryTextSubmit(searchKey: String?): Boolean {
 
                 var isProductExisting = false
-                var searchResult: ArrayList<Product> = arrayListOf()
+                val searchResult: ArrayList<Product> = arrayListOf()
 
                 //looping through coffee items to check if searchKey is existing
                 for (item in coffeeItems) {
@@ -164,9 +165,9 @@ class HomeFragment : Fragment() {
                 }
 
                 if (isProductExisting) {
-                    var coffeeItemsSearched: ArrayList<CoffeeResponseItem> = arrayListOf()
+                    val coffeeItemsSearched: ArrayList<CoffeeResponseItem> = arrayListOf()
                     coffeeItemsSearched.add(CoffeeResponseItem("Search Result", searchResult))
-                    setupAdapterList(coffeeItemsSearched)
+                    coffeeGroupAdapter.differ.submitList(coffeeItemsSearched)
                 } else {
                     Toast.makeText(requireContext(), "Product NOT found", Toast.LENGTH_LONG).show()
                 }
@@ -175,6 +176,9 @@ class HomeFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if (TextUtils.isEmpty(newText)) {
+                    coffeeGroupAdapter.differ.submitList(coffeeItems)
+                }
                 return false
             }
         })
